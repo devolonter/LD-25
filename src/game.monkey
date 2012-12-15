@@ -11,10 +11,13 @@ Class Game Extends FlxGame
 	Global MaxY:Float
 
 	Method New()
-		Super.New(640, 480, GetClass("PlayState"), 1, 60, 60)
+		Super.New(480, 800, GetClass("PlayState"), 1, 60, 60)
+		forceDebugger = True
 	End Method
 
 	Method OnContentInit:Void()
+		FlxAssetsManager.AddImage("player", "images/player.png")
+	
 		FlxTextFontMachineDriver.Init()
 		FlxText.SetDefaultDriver(GetClass("FlxTextFontMachineDriver"))
 	End Method
