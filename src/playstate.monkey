@@ -5,6 +5,7 @@ Import player
 Import walls
 Import barrels
 Import bar
+Import poison
 
 Class PlayState Extends FlxState
 
@@ -15,6 +16,8 @@ Class PlayState Extends FlxState
 	Field player:Player
 	
 	Field lifeBar:Bar
+	
+	Field poisons:FlxGroup
 	
 	Field barrels:Barrels
 	
@@ -30,8 +33,9 @@ Class PlayState Extends FlxState
 		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
 		
 		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
+		poisons = FlxGroup(Add(New FlxGroup()))
 		
-		player = New Player(lifeBar, poisonBar)
+		player = New Player(lifeBar, poisonBar, poisons)
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
 		Add(player)
 		

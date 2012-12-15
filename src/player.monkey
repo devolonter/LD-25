@@ -2,16 +2,19 @@ Strict
 
 Import flixel
 Import bar
+Import poison
 
 Class Player Extends FlxSprite
 
-	Field jumpPower:Float
-	
 	Field lifeBar:Bar
 	
 	Field poisonBar:Bar
 	
-	Method New(lifeBar:Bar, poisonBar:Bar)
+	Field poisons:FlxGroup
+	
+	Field poison:Poison
+	
+	Method New(lifeBar:Bar, poisonBar:Bar, poisons:FlxGroup)
 		Super.New(0, 0)
 		
 		LoadGraphic("player", True, True, 55, 50)
@@ -19,11 +22,11 @@ Class Player Extends FlxSprite
 		
 		maxVelocity.x = 150
 		drag.x = maxVelocity.x * 10
-		acceleration.y = FlxG.Height
-		jumpPower = acceleration.y * 0.5
+		acceleration.y = FlxG.Height * 0.7
 		
 		Self.lifeBar = lifeBar
 		Self.poisonBar = poisonBar
+		Self.poisons = poisons
 	End Method
 	
 	Method Update:Void()	
@@ -39,7 +42,29 @@ Class Player Extends FlxSprite
 		
 		If (velocity.y = 0) Then
 			If (FlxG.Keys.JustPressed(KEY_UP))
-				velocity.y -= jumpPower
+				velocity.y -= acceleration.y * 0.6
+				
+			ElseIf(FlxG.Keys.JustPressed(KEY_Z) Or FlxG.Keys.JustPressed(KEY_X)) Then
+				If (poisonBar.Value > 0) Then
+					poison = Poison(poisons.Recycle(ClassInfo(Poison.ClassObject)))
+					poisonBar.Value -= 1
+					
+					If (Facing = LEFT) Then
+						poison.Reset(x - 10, y + 10)
+					Else
+						poison.Reset(x + width + 10, y + 10)
+					End If
+				
+					If (FlxG.Keys.JustPressed(KEY_Z)) Then
+						poison.acceleration.y = acceleration.y
+					Else
+						If (Facing = LEFT) Then
+							poison.velocity.x = -maxVelocity.x * 2
+						Else
+							poison.velocity.x = maxVelocity.x * 2
+						End If
+					End If
+				End If
 			End If
 		End If
 		
