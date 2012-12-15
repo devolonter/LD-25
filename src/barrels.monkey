@@ -3,18 +3,18 @@ Strict
 Import flixel
 Import player
 
-Class Poison Extends FlxGroup Implements FlxOverlapNotifyListener
+Class Barrels Extends FlxGroup Implements FlxOverlapNotifyListener
 
 	Field player:Player
 
 	Method New(y:Float)
 		Super.New(2)
 	
-		Local p:FlxSprite = New FlxSprite(0, 0, "poison")
+		Local p:FlxSprite = New FlxSprite(0, 0, "barrel")
 		p.Reset(0, y - p.height)
 		Add(p)
 		
-		p = New FlxSprite(0, 0, "poison")
+		p = New FlxSprite(0, 0, "barrel")
 		p.Reset(FlxG.Width - p.width, y - p.height)
 		Add(p)
 	End Method

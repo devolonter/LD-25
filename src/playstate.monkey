@@ -3,7 +3,7 @@ Strict
 Import flixel
 Import player
 Import walls
-Import poison
+Import barrels
 Import bar
 
 Class PlayState Extends FlxState
@@ -16,14 +16,14 @@ Class PlayState Extends FlxState
 	
 	Field lifeBar:Bar
 	
-	Field poison:Poison
+	Field barrels:Barrels
 	
 	Field poisonBar:Bar
 	
 	Method Create:Void()
 		walls = Walls(Add(New Walls(HEIGHT)))
 		
-		poison = Poison(Add(New Poison(HEIGHT)))
+		barrels = Barrels(Add(New Barrels(HEIGHT)))
 		poisonBar = New Bar(10, 10, "poisonbar", 5)
 		poisonBar.Max = 1
 		poisonBar.Value = 1
@@ -42,7 +42,7 @@ Class PlayState Extends FlxState
 		Super.Update()
 		
 		FlxG.Collide(walls, player)
-		FlxG.Overlap(poison, player, poison)
+		FlxG.Overlap(barrels, player, barrels)
 	End Method
 	
 
