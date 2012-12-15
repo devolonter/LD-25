@@ -1,14 +1,18 @@
 Strict
 
 Import flixel
-Import playstate
+Import bar
 
 Class Player Extends FlxSprite
 
 	Field jumpPower:Float
 	
-	Method New(x:Float = 0, y:Float = 0)
-		Super.New(x, y)
+	Field lifeBar:Bar
+	
+	Field poisonBar:Bar
+	
+	Method New(lifeBar:Bar, poisonBar:Bar)
+		Super.New(0, 0)
 		
 		LoadGraphic("player", True, True, 55, 50)
 		AddAnimation("run",[0, 1, 2, 3, 4, 5], 15)
@@ -16,7 +20,10 @@ Class Player Extends FlxSprite
 		maxVelocity.x = 150
 		drag.x = maxVelocity.x * 10
 		acceleration.y = FlxG.Height
-		jumpPower = acceleration.y * .5
+		jumpPower = acceleration.y * 0.5
+		
+		Self.lifeBar = lifeBar
+		Self.poisonBar = poisonBar
 	End Method
 	
 	Method Update:Void()	
@@ -30,8 +37,10 @@ Class Player Extends FlxSprite
 			acceleration.x += drag.x
 		End If
 		
-		If (FlxG.Keys.JustPressed(KEY_UP) And velocity.y = 0) Then
-			velocity.y -= jumpPower
+		If (velocity.y = 0) Then
+			If (FlxG.Keys.JustPressed(KEY_UP))
+				velocity.y -= jumpPower
+			End If
 		End If
 		
 		If (velocity.x = 0 Or velocity.y <> 0) Then

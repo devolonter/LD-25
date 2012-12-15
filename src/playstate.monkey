@@ -23,16 +23,17 @@ Class PlayState Extends FlxState
 	Method Create:Void()
 		walls = Walls(Add(New Walls(HEIGHT)))
 		
-		barrels = Barrels(Add(New Barrels(HEIGHT)))
 		poisonBar = New Bar(10, 10, "poisonbar", 5)
 		poisonBar.Max = 1
 		poisonBar.Value = 1
 		
-		player = New Player()
-		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
-		Add(player)
+		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
 		
 		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
+		
+		player = New Player(lifeBar, poisonBar)
+		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
+		Add(player)
 		
 		Add(poisonBar)
 		Add(lifeBar)
