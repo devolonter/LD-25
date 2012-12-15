@@ -32,9 +32,9 @@ Class Player Extends FlxSprite
 		
 		If (FlxG.Keys.JustPressed(KEY_UP) And velocity.y = 0) Then
 			velocity.y -= jumpPower
-		End If	
+		End If
 		
-		If (velocity.x = 0) Then
+		If (velocity.x = 0 Or velocity.y <> 0) Then
 			Frame = 0
 		Else
 			Play("run")

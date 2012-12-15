@@ -41,6 +41,7 @@ Public
 		width = sprite.width * countItems
 		height = sprite.height
 		max = countItems
+		Value = max
 	End Method
 	
 	Method Value:Void(newValue:Int) Property

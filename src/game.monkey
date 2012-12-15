@@ -16,10 +16,11 @@ Class Game Extends FlxGame
 	End Method
 
 	Method OnContentInit:Void()
-		FlxAssetsManager.AddImage("bar_poison", "images/bar_poison.png")
-	
 		FlxAssetsManager.AddImage("player", "images/player.png")
+		FlxAssetsManager.AddImage("lifebar", "images/bar_life.png")
+		
 		FlxAssetsManager.AddImage("poison", "images/poison.png")
+		FlxAssetsManager.AddImage("poisonbar", "images/bar_poison.png")
 	
 		FlxTextFontMachineDriver.Init()
 		FlxText.SetDefaultDriver(GetClass("FlxTextFontMachineDriver"))

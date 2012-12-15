@@ -14,6 +14,8 @@ Class PlayState Extends FlxState
 	
 	Field player:Player
 	
+	Field lifeBar:Bar
+	
 	Field poison:Poison
 	
 	Field poisonBar:Bar
@@ -22,7 +24,7 @@ Class PlayState Extends FlxState
 		walls = Walls(Add(New Walls(HEIGHT)))
 		
 		poison = Poison(Add(New Poison(HEIGHT)))
-		poisonBar = New Bar(10, 10, "bar_poison", 5)
+		poisonBar = New Bar(10, 10, "poisonbar", 5)
 		poisonBar.Max = 1
 		poisonBar.Value = 1
 		
@@ -30,7 +32,10 @@ Class PlayState Extends FlxState
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
 		Add(player)
 		
+		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
+		
 		Add(poisonBar)
+		Add(lifeBar)
 	End Method
 	
 	Method Update:Void()
