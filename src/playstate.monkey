@@ -4,6 +4,7 @@ Import flixel
 Import player
 Import walls
 Import poison
+Import bar
 
 Class PlayState Extends FlxState
 
@@ -15,13 +16,21 @@ Class PlayState Extends FlxState
 	
 	Field poison:Poison
 	
+	Field poisonBar:Bar
+	
 	Method Create:Void()
 		walls = Walls(Add(New Walls(HEIGHT)))
+		
 		poison = Poison(Add(New Poison(HEIGHT)))
+		poisonBar = New Bar(10, 10, "bar_poison", 5)
+		poisonBar.Max = 1
+		poisonBar.Value = 1
 		
 		player = New Player()
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
 		Add(player)
+		
+		Add(poisonBar)
 	End Method
 	
 	Method Update:Void()
