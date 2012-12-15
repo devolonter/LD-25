@@ -10,7 +10,7 @@ Import poison
 Class PlayState Extends FlxState
 
 	Const HEIGHT:Float = 300
-	
+		
 	Field walls:Walls
 	
 	Field player:Player
@@ -24,6 +24,7 @@ Class PlayState Extends FlxState
 	Field poisonBar:Bar
 	
 	Method Create:Void()
+		Add(New FlxSprite(0, 0, "bg"))
 		walls = Walls(Add(New Walls(HEIGHT)))
 		
 		poisonBar = New Bar(10, 10, "poisonbar", 5)
@@ -44,10 +45,11 @@ Class PlayState Extends FlxState
 	End Method
 	
 	Method Update:Void()
+		FlxG.Overlap(barrels, player, barrels)
+	
 		Super.Update()
 		
 		FlxG.Collide(walls, player)
-		FlxG.Overlap(barrels, player, barrels)
 	End Method
 	
 

@@ -2,47 +2,36 @@ Strict
 
 Import flixel
 Import player
-Import bar
+Import barrel
 
 Class Barrels Extends FlxGroup Implements FlxOverlapNotifyListener
 
-	Field player:Player
+	Field barrel:Barrel
 	
 	Field poisonbar:Bar
-	
-	Field curIndex:Int
 
 	Method New(y:Float, poisonBar:Bar)
 		Super.New(2)
 	
-		Local p:FlxSprite = New FlxSprite(0, 0, "barrel")
-		p.Reset(0, y - p.height)
-		Add(p)
+		Local b:Barrel = New Barrel()
+		b.Reset(0, y - b.height)
+		Add(b)
 		
-		p = New FlxSprite(0, 0, "barrel")
-		p.Reset(FlxG.Width - p.width, y - p.height)
-		Add(p)
+		b = New Barrel()
+		b.Reset(FlxG.Width - b.width, y - b.height)
+		Add(b)
 		
 		Self.poisonbar = poisonBar
-		
-		curIndex = -1
 	End Method
 	
 	Method OnOverlapNotify:Void(object1:FlxObject, object2:FlxObject)
-		poisonbar.Value = poisonbar.Max
-		object1.Solid = False
-		
-		If (curIndex < 0) Then
-			For Local i:Int = 0 Until Length
-				If (object1 = Members[i]) Then
-					curIndex = i
-					Exit
-				End If
-			Next
-		End If
-		
-		curIndex = Not curIndex
-		FlxObject(Members[curIndex]).Solid = True
-	End Method
+		barrel = Barrel(object1)
+		barrel.collided = True
 
+		If ( Not barrel.empty) Then
+			poisonbar.Value = poisonbar.Max
+			barrel.empty = True
+		End If
+	End Method
+	
 End Class

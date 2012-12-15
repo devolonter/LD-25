@@ -16,6 +16,8 @@ Class Game Extends FlxGame
 	End Method
 
 	Method OnContentInit:Void()
+		FlxAssetsManager.AddImage("bg", "images/bg.png")
+	
 		FlxAssetsManager.AddImage("player", "images/player.png")
 		FlxAssetsManager.AddImage("poison", "images/poison.png")
 		FlxAssetsManager.AddImage("lifebar", "images/bar_life.png")
