@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<JiProjUserOptions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Files>
+    <DocUserOptions Filename=".\main.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
+      <CursorPos>
+        <X>0</X>
+        <Y>0</Y>
+      </CursorPos>
+      <OutLiningSerialization />
+      <OutLiningSplitSerialization />
+      <DocGUID>9f007f1a-2b15-4b53-9307-dc17c16e30b7</DocGUID>
+      <Bookmarks />
+    </DocUserOptions>
+  </Files>
+  <Folders>
+    <FolderStatus NodePath="LD25\flixel" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\bananas" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\data" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\data\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\data\src\fonts" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\data\vcr" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\data\vis" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\flxtext" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\flxtext\driver" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\native" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\plugin" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\plugin\photonstorm" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\input" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\replay" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\resolutionpolicy" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\tweens" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\tweens\misc" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\tweens\motion" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\tweens\sound" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\system\tweens\util" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\camerafx" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\camerafx\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\camerafx\src\camerafx" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\cameras" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\cameras\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\cameras\src\cameras" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\objects" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\objects\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\objects\src\objects" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\particles" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\paths" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\paths\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\paths\src\paths" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\sound" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\sprites" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\sprites\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\sprites\src\sprites" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\angelfont.data" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\angelfont.data\fonts" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\angelfont.data\fonts\system" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\angelfont.data\fonts\system\angelfont" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tests\visual\text\src\text" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tools" Expanded="false" />
+    <FolderStatus NodePath="LD25\flixel\tools\src" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\firstsample.data" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\firstsample.data\bluesky" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\sample02.data" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\sample02.data\basicsmallfont" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\sample02.data\SportsFont" Expanded="false" />
+    <FolderStatus NodePath="LD25\fontmachine\sample programs\sample03.data" Expanded="false" />
+    <FolderStatus NodePath="LD25\src" Expanded="false" />
+  </Folders>
+</JiProjUserOptions>
