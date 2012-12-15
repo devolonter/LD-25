@@ -30,7 +30,7 @@ Class Player Extends FlxSprite
 			acceleration.x += drag.x
 		End If
 		
-		If (FlxG.Keys.Up And velocity.y = 0) Then
+		If (FlxG.Keys.JustPressed(KEY_UP) And velocity.y = 0) Then
 			velocity.y -= jumpPower
 		End If	
 		
