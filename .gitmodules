@@ -1,0 +1,6 @@
+[submodule "flixel"]
+	path = flixel
+	url = https://github.com/devolonter/flixel-monkey
+[submodule "fontmachine"]
+	path = fontmachine
+	url = git@github.com:MonkeyModules/fontmachine.git
