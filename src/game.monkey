@@ -24,6 +24,8 @@ Class Game Extends FlxGame
 		
 		FlxAssetsManager.AddImage("barrel", "images/barrel.png")
 		FlxAssetsManager.AddImage("poisonbar", "images/bar_poison.png")
+		
+		FlxAssetsManager.AddImage("professor", "images/professor.png")
 	
 		FlxTextFontMachineDriver.Init()
 		FlxText.SetDefaultDriver(GetClass("FlxTextFontMachineDriver"))

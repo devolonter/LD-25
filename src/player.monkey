@@ -20,7 +20,7 @@ Class Player Extends FlxSprite
 		LoadGraphic("player", True, True, 55, 50)
 		AddAnimation("run",[0, 1, 2, 3, 4, 5], 15)
 		
-		maxVelocity.x = 150
+		maxVelocity.x = 200
 		drag.x = maxVelocity.x * 10
 		acceleration.y = FlxG.Height * 0.7
 		
