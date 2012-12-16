@@ -23,9 +23,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const COMPLEXITY_FACTOR_INC:Float = 0.02
 	
-	Const PROFESSORS_BASE_TIME:Float = 5
+	Const PROFESSORS_BASE_TIME:Float = 4
 	
-	Const PROFESSORS_BASE_AMOUNT:Float = 3
+	Const PROFESSORS_BASE_AMOUNT:Float = 5
 	
 	Const PROFESSORS_MAX_AMOUNT:Float = 15
 	
@@ -36,6 +36,16 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Const PROFESSORS_MAX_VELOCITY_X:Float = 200
 	
 	Const PROFESSORS_MAX_VELOCITY_Y:Float = 150
+	
+	Const BRICKS_START_FACTOR:Float = 0.25
+	
+	Const BRICKS_BASE_TIME:Float = 10
+	
+	Const BRICKS_GREEN_ZONE:Float = 0.25
+	
+	Const BONUSES_BASE_TIME:Float = 20
+	
+	Const BONUSES_BASE_LIFETIME:Float = 10
 'End consts
 		
 	Field walls:Walls
@@ -100,14 +110,15 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		FlxTimer.Manager().Add(bonusesTimer)
 		
 		complexityFactor = 0
-		
-		'bricksTimer.Start(2, 0, Self)
-		'bonusesTimer.Start(3, 0, Self)
-		
-		AddProfessor()
+		GenerateProfessor()
+		GenerateBonus()
 	End Method
 	
 	Method Update:Void()
+		If ( Not player.alive) Then
+			Error "Game Over!"
+		End If
+	
 		FlxG.Overlap(barrels, player, barrels)
 		FlxG.Overlap(bonuses, player, bonuses)
 		
@@ -122,13 +133,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		FlxG.Collide(bonuses, walls)
 		FlxG.Collide(bricks, walls, bricks)
 		FlxG.Collide(poisons, professors, poisons)
-		
-		If ( Not player.alive) Then
-			Error "Game Over!"
-		End If
 	End Method
 	
-	Method AddProfessor:Void()
+	Method GenerateProfessor:Void()
 		If (professors.CountLiving() < Int(PROFESSORS_BASE_AMOUNT + (PROFESSORS_MAX_AMOUNT - PROFESSORS_BASE_AMOUNT) * complexityFactor)) Then
 			Local ladder:Int
 			Local professor:Professor
@@ -164,21 +171,47 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor), 1, Self)
 	End Method
 	
+	Method GenerateBrick:Void()
+		Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))
+		Local x:Float = player.x + FlxG.Width * BRICKS_GREEN_ZONE * (1 - complexityFactor) * Floor(FlxG.Random() * 2 - 1)
+		x = Min(Max(x, 0.0), FlxG.Width - brick.width)
+		
+		brick.Reset(x, -brick.height)
+		brick.acceleration.y = GRAVITY
+		
+		bricksTimer.Start(BRICKS_BASE_TIME * (1 - complexityFactor), 1, Self)
+	End Method
+	
+	Method GenerateBonus:Void()
+		If ( Not bonusesTimer.finished) Then
+			bonusesTimer.Start(BONUSES_BASE_TIME * (1 + complexityFactor), 1, Self)
+			Return
+		End If
+	
+		Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
+		bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 20) + 10, -bonus.height)
+		bonus.acceleration.y = GRAVITY
+		bonus.lifeTime = BONUSES_BASE_LIFETIME * (1 - complexityFactor)
+		bonus.Flicker(0)
+		
+		bonusesTimer.Start(BONUSES_BASE_TIME * (1 + complexityFactor) * (1 + FlxG.Random() * complexityFactor), 1, Self)
+	End Method
+	
 	Method OnTimerTick:Void(timer:FlxTimer)
 		Select(timer)
 			Case professorsTimer
 				complexityFactor += COMPLEXITY_FACTOR_INC * (1 - complexityFactor)
-				AddProfessor()
-								
+				
+				GenerateProfessor()
+				
+				If (complexityFactor > BRICKS_START_FACTOR And Not bricksTimer.TimeLeft) Then
+					GenerateBrick()
+				End If
 			Case bricksTimer
-				Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))				
-				brick.Reset(FlxG.Random() * (FlxG.Width - brick.width - 20) + 10, -brick.height)
-				brick.acceleration.y = GRAVITY
+				GenerateBrick()
 				
 			Case bonusesTimer				
-				Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
-				bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 20) + 10, -bonus.height)
-				bonus.acceleration.y = GRAVITY
+				GenerateBonus()
 		End Select
 		
 	End Method
