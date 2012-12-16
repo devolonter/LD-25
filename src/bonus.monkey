@@ -2,13 +2,13 @@ Strict
 
 Import flixel
 
-Class Brick Extends FlxSprite
+Class Bonus Extends FlxSprite
 
 	Global ClassObject:Object
 	
 	Method New()
 		Super.New(0, 0)
-		MakeGraphic(30, 15)
+		MakeGraphic(32, 32, FlxG.BLUE)
 	End Method
 
 End Class

@@ -11,6 +11,8 @@ Import professors
 Import brick
 Import poisons
 Import bricks
+Import bonuses
+Import bonus
 
 Class PlayState Extends FlxState Implements FlxTimerListener
 
@@ -34,6 +36,10 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Field bricksTimer:FlxTimer
 	
+	Field bonuses:Bonuses
+	
+	Field bonusesTimer:FlxTimer
+	
 	Field barrels:Barrels
 	
 	Field poisonBar:Bar
@@ -53,6 +59,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		
 		professors = Professors(Add(New Professors()))
 		bricks = Bricks(Add(New Bricks()))
+		bonuses = Bonuses(Add(New Bonuses()))
 		
 		player = New Player(lifeBar, poisonBar, poisons)
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
@@ -67,12 +74,17 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		bricksTimer = New FlxTimer()
 		FlxTimer.Manager().Add(bricksTimer)
 		
+		bonusesTimer = New FlxTimer()
+		FlxTimer.Manager().Add(bonusesTimer)
+		
 		professorsTimer.Start(5, 0, Self)
 		bricksTimer.Start(2, 0, Self)
+		bonusesTimer.Start(3, 0, Self)
 	End Method
 	
 	Method Update:Void()
 		FlxG.Overlap(barrels, player, barrels)
+		FlxG.Overlap(bonuses, player, bonuses)
 		
 		If ( Not player.Flickering) Then
 			FlxG.Overlap(professors, player, professors)
@@ -82,6 +94,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Super.Update()
 		
 		FlxG.Collide(player, walls)
+		FlxG.Collide(bonuses, walls)
 		FlxG.Collide(bricks, walls, bricks)
 		FlxG.Collide(poisons, professors, poisons)
 		
@@ -102,6 +115,12 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 			Case bricksTimer
 				Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))				
 				brick.Reset(FlxG.Random() * (FlxG.Width - brick.width - 20) + 10, -brick.height)
+				brick.acceleration.y = GRAVITY
+				
+			Case bonusesTimer				
+				Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
+				bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 20) + 10, -bonus.height)
+				bonus.acceleration.y = GRAVITY
 		End Select
 		
 	End Method
