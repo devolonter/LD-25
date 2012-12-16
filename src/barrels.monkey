@@ -14,11 +14,11 @@ Class Barrels Extends FlxGroup Implements FlxOverlapNotifyListener
 		Super.New(2)
 	
 		Local b:Barrel = New Barrel()
-		b.Reset(0, y - b.height)
+		b.Reset(5, y - b.height)
 		Add(b)
 		
 		b = New Barrel()
-		b.Reset(FlxG.Width - b.width, y - b.height)
+		b.Reset(FlxG.Width - b.width - 5, y - b.height)
 		Add(b)
 		
 		Self.poisonbar = poisonBar

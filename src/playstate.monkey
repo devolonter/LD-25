@@ -83,13 +83,11 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		poisonBar = New Bar(10, 10, "poisonbar", 5)
 		poisonBar.Max = 1
 		poisonBar.Value = 1
+		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
 		
 		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
-		
-		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
-		poisons = Poisons(Add(New Poisons()))
-		
-		professors = Professors(Add(New Professors()))
+		poisons = New Poisons()
+				
 		bricks = Bricks(Add(New Bricks()))
 		bonuses = Bonuses(Add(New Bonuses()))
 		
@@ -99,6 +97,14 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		
 		Add(poisonBar)
 		Add(lifeBar)
+		
+		Add(New FlxSprite(0, HEIGHT - 2, "floor"))
+		professors = Professors(Add(New Professors()))
+		Add(poisons)
+		
+		Add(New FlxSprite(95, HEIGHT - 2, "stairs"))
+		Add(New FlxSprite(238, HEIGHT - 2, "stairs"))
+		Add(New FlxSprite(381, HEIGHT - 2, "stairs"))
 		
 		professorsTimer = New FlxTimer()
 		FlxTimer.Manager().Add(professorsTimer)

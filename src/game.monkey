@@ -17,6 +17,8 @@ Class Game Extends FlxGame
 
 	Method OnContentInit:Void()
 		FlxAssetsManager.AddImage("bg", "images/bg.png")
+		FlxAssetsManager.AddImage("floor", "images/floor.png")
+		FlxAssetsManager.AddImage("stairs", "images/stairs.png")
 	
 		FlxAssetsManager.AddImage("player", "images/player.png")
 		FlxAssetsManager.AddImage("poison", "images/poison.png")
