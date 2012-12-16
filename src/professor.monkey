@@ -8,10 +8,11 @@ Class Professor Extends FlxSprite
 
 	Global ClassObject:Object
 	
+	Field ladder:Int
+	
 	Method New()
 		Super.New(0, 0, "professor")
-		maxVelocity.x = 30
-		maxVelocity.y = 30
+		ladder = 0
 	End Method
 	
 	Method Update:Void()

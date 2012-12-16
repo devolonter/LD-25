@@ -16,9 +16,27 @@ Import bonus
 
 Class PlayState Extends FlxState Implements FlxTimerListener
 
+'Consts for game ballance
 	Const HEIGHT:Float = 300
 	
 	Const GRAVITY:Float = 550
+	
+	Const COMPLEXITY_FACTOR_INC:Float = 0.02
+	
+	Const PROFESSORS_BASE_TIME:Float = 5
+	
+	Const PROFESSORS_BASE_AMOUNT:Float = 3
+	
+	Const PROFESSORS_MAX_AMOUNT:Float = 15
+	
+	Const PROFESSORS_BASE_VELOCITY_Y:Float = 30
+	
+	Const PROFESSORS_BASE_VELOCITY_X:Float = 100
+	
+	Const PROFESSORS_MAX_VELOCITY_X:Float = 200
+	
+	Const PROFESSORS_MAX_VELOCITY_Y:Float = 150
+'End consts
 		
 	Field walls:Walls
 	
@@ -43,6 +61,10 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Field barrels:Barrels
 	
 	Field poisonBar:Bar
+	
+	Field complexityFactor:FLoat
+	
+	Field ladders:Int[3]
 	
 	Method Create:Void()
 		Add(New FlxSprite(0, 0, "bg"))
@@ -77,9 +99,12 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		bonusesTimer = New FlxTimer()
 		FlxTimer.Manager().Add(bonusesTimer)
 		
-		professorsTimer.Start(5, 0, Self)
-		bricksTimer.Start(2, 0, Self)
-		bonusesTimer.Start(3, 0, Self)
+		complexityFactor = 0
+		
+		'bricksTimer.Start(2, 0, Self)
+		'bonusesTimer.Start(3, 0, Self)
+		
+		AddProfessor()
 	End Method
 	
 	Method Update:Void()
@@ -103,15 +128,48 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		End If
 	End Method
 	
+	Method AddProfessor:Void()
+		If (professors.CountLiving() < Int(PROFESSORS_BASE_AMOUNT + (PROFESSORS_MAX_AMOUNT - PROFESSORS_BASE_AMOUNT) * complexityFactor)) Then
+			Local ladder:Int
+			Local professor:Professor
+			
+			ladders[0] = 0; ladders[1] = 0; ladders[2] = 0
+			
+			For Local i:Int = 0 Until professors.Length
+				professor = Professor(professors.Members[i])
+			
+				If (professor.alive And professor.velocity.x = 0) Then
+					ladders[professor.ladder] += 1
+				End If
+			Next
+			
+			If (ladders[0] < ladders[1] And ladders[0] < ladders[2]) Then
+				ladder = 0
+			ElseIf(ladders[1] < ladders[0] And ladders[1] < ladders[2]) Then
+				ladder = 1
+			ElseIf(ladders[2] < ladders[0] And ladders[2] < ladders[1]) Then
+				ladder = 2
+			Else
+				ladder = Min(Int(FlxG.Random() * 3), 2)
+			End If
+			
+			professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
+			
+			professor.ladder = ladder
+			professor.Reset(77 + ladder * 143, FlxG.Height)
+			professor.velocity.y = - (PROFESSORS_MAX_VELOCITY_Y - PROFESSORS_BASE_VELOCITY_Y) * complexityFactor - PROFESSORS_BASE_VELOCITY_Y
+			professor.maxVelocity.x = (PROFESSORS_MAX_VELOCITY_X - PROFESSORS_BASE_VELOCITY_X) * complexityFactor + PROFESSORS_BASE_VELOCITY_X
+		End If
+		
+		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor), 1, Self)
+	End Method
+	
 	Method OnTimerTick:Void(timer:FlxTimer)
 		Select(timer)
 			Case professorsTimer
-				Local ladder:Int = Max(Min(Int(FlxG.Random() * 4), 3), 1)
-				Local professor:Professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
-				
-				professor.Reset(75 + (ladder - 1) * 145, FlxG.Height)
-				professor.velocity.y = -professor.maxVelocity.y
-				
+				complexityFactor += COMPLEXITY_FACTOR_INC * (1 - complexityFactor)
+				AddProfessor()
+								
 			Case bricksTimer
 				Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))				
 				brick.Reset(FlxG.Random() * (FlxG.Width - brick.width - 20) + 10, -brick.height)
