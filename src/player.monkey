@@ -4,7 +4,7 @@ Import flixel
 Import bar
 Import poison
 
-Class Player Extends FlxSprite
+Class Player Extends FlxSprite Implements FlxOverlapNotifyListener
 
 	Field lifeBar:Bar
 	
@@ -74,5 +74,12 @@ Class Player Extends FlxSprite
 			Play("run")
 		End If
 	End Method
+	
+	Method OnOverlapNotify:Void(object1:FlxObject, object2:FlxObject)
+		If (Flickering) Return
+		lifeBar.Value -= 1
+		Flicker(5)
+	End Method
+
 
 End Class

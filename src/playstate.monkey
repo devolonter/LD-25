@@ -59,11 +59,16 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Method Update:Void()
 		FlxG.Overlap(barrels, player, barrels)
+		FlxG.Overlap(player, professors, player)
 	
 		Super.Update()
 		
 		FlxG.Collide(walls, player)
 		FlxG.Collide(professors, poisons, professors)
+		
+		If (lifeBar.Value = 0) Then
+			Error "Game Over!"
+		End If
 	End Method
 	
 	Method OnTimerTick:Void(timer:FlxTimer)
