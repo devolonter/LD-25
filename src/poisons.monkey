@@ -3,11 +3,11 @@ Strict
 Import flixel
 Import player
 
-Class Professors Extends FlxGroup Implements FlxOverlapNotifyListener
+Class Poisons Extends FlxGroup Implements FlxOverlapNotifyListener
 	
 	Method OnOverlapNotify:Void(object1:FlxObject, object2:FlxObject)
-		If (object2.Flickering) Return
-		object2.Hurt(1)
+		object1.Kill()
+		object2.Kill()
 	End Method
 
 End Class

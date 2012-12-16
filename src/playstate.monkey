@@ -8,6 +8,8 @@ Import bar
 Import poison
 Import professor
 Import professors
+Import brick
+Import poisons
 
 Class PlayState Extends FlxState Implements FlxTimerListener
 
@@ -19,9 +21,11 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Field lifeBar:Bar
 	
-	Field poisons:FlxGroup
+	Field poisons:Poisons
 	
 	Field professors:Professors
+	
+	Field bricks:FlxGroup
 	
 	Field timer:FlxTimer
 	
@@ -40,7 +44,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
 		
 		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
-		poisons = FlxGroup(Add(New FlxGroup()))
+		poisons = Poisons(Add(New Poisons()))
 		
 		professors = Professors(Add(New Professors()))
 		
@@ -59,14 +63,14 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Method Update:Void()
 		FlxG.Overlap(barrels, player, barrels)
-		FlxG.Overlap(player, professors, player)
+		FlxG.Overlap(professors, player, professors)
 	
 		Super.Update()
 		
 		FlxG.Collide(walls, player)
-		FlxG.Collide(professors, poisons, professors)
+		FlxG.Collide(poisons, professors, poisons)
 		
-		If (lifeBar.Value = 0) Then
+		If ( Not player.alive) Then
 			Error "Game Over!"
 		End If
 	End Method

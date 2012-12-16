@@ -4,7 +4,7 @@ Import flixel
 Import bar
 Import poison
 
-Class Player Extends FlxSprite Implements FlxOverlapNotifyListener
+Class Player Extends FlxSprite
 
 	Field lifeBar:Bar
 	
@@ -49,6 +49,9 @@ Class Player Extends FlxSprite Implements FlxOverlapNotifyListener
 					poison = Poison(poisons.Recycle(ClassInfo(Poison.ClassObject)))
 					poisonBar.Value -= 1
 					
+					poison.acceleration.y = 0
+					poison.velocity.x = 0
+					
 					If (Facing = LEFT) Then
 						poison.Reset(x - 10, y + 10)
 					Else
@@ -75,10 +78,14 @@ Class Player Extends FlxSprite Implements FlxOverlapNotifyListener
 		End If
 	End Method
 	
-	Method OnOverlapNotify:Void(object1:FlxObject, object2:FlxObject)
-		If (Flickering) Return
-		lifeBar.Value -= 1
-		Flicker(5)
+	Method Hurt:Void(damage:Float = 1)
+		lifeBar.Value -= damage
+		
+		If (lifeBar.Value <= 0) Then
+			Kill()
+		Else
+			Flicker(5)
+		End If
 	End Method
 
 
