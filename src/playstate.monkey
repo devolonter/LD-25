@@ -10,10 +10,13 @@ Import professor
 Import professors
 Import brick
 Import poisons
+Import bricks
 
 Class PlayState Extends FlxState Implements FlxTimerListener
 
 	Const HEIGHT:Float = 300
+	
+	Const GRAVITY:Float = 550
 		
 	Field walls:Walls
 	
@@ -25,9 +28,11 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Field professors:Professors
 	
-	Field bricks:FlxGroup
+	Field professorsTimer:FlxTimer
 	
-	Field timer:FlxTimer
+	Field bricks:Bricks
+	
+	Field bricksTimer:FlxTimer
 	
 	Field barrels:Barrels
 	
@@ -47,6 +52,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		poisons = Poisons(Add(New Poisons()))
 		
 		professors = Professors(Add(New Professors()))
+		bricks = Bricks(Add(New Bricks()))
 		
 		player = New Player(lifeBar, poisonBar, poisons)
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
@@ -55,19 +61,28 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Add(poisonBar)
 		Add(lifeBar)
 		
-		timer = New FlxTimer()
-		FlxTimer.Manager().Add(timer)
+		professorsTimer = New FlxTimer()
+		FlxTimer.Manager().Add(professorsTimer)
 		
-		timer.Start(5, 0, Self)
+		bricksTimer = New FlxTimer()
+		FlxTimer.Manager().Add(bricksTimer)
+		
+		professorsTimer.Start(5, 0, Self)
+		bricksTimer.Start(2, 0, Self)
 	End Method
 	
 	Method Update:Void()
 		FlxG.Overlap(barrels, player, barrels)
-		FlxG.Overlap(professors, player, professors)
+		
+		If ( Not player.Flickering) Then
+			FlxG.Overlap(professors, player, professors)
+			FlxG.Overlap(bricks, player, bricks)
+		End If
 	
 		Super.Update()
 		
-		FlxG.Collide(walls, player)
+		FlxG.Collide(player, walls)
+		FlxG.Collide(bricks, walls, bricks)
 		FlxG.Collide(poisons, professors, poisons)
 		
 		If ( Not player.alive) Then
@@ -76,11 +91,19 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	End Method
 	
 	Method OnTimerTick:Void(timer:FlxTimer)
-		Local ladder:Int = Max(Min(Int(FlxG.Random() * 4), 3), 1)
-		Local professor:Professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
+		Select(timer)
+			Case professorsTimer
+				Local ladder:Int = Max(Min(Int(FlxG.Random() * 4), 3), 1)
+				Local professor:Professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
+				
+				professor.Reset(75 + (ladder - 1) * 145, FlxG.Height)
+				professor.velocity.y = -professor.maxVelocity.y
+				
+			Case bricksTimer
+				Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))				
+				brick.Reset(FlxG.Random() * (FlxG.Width - brick.width - 20) + 10, -brick.height)
+		End Select
 		
-		professor.Reset(75 + (ladder - 1) * 145, FlxG.Height)
-		professor.velocity.y = -professor.maxVelocity.y
 	End Method
 	
 End Class

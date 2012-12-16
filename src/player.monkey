@@ -3,6 +3,7 @@ Strict
 Import flixel
 Import bar
 Import poison
+Import playstate
 
 Class Player Extends FlxSprite
 
@@ -22,7 +23,7 @@ Class Player Extends FlxSprite
 		
 		maxVelocity.x = 200
 		drag.x = maxVelocity.x * 10
-		acceleration.y = FlxG.Height * 0.7
+		acceleration.y = PlayState.GRAVITY
 		
 		Self.lifeBar = lifeBar
 		Self.poisonBar = poisonBar
