@@ -43,9 +43,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PROFFESORS_TWO_LIMIT_FACTOR:Float = 0.5
 	
-	Const BRICKS_START_FACTOR:Float = 0
+	Const BRICKS_START_FACTOR:Float = 0.25
 	
-	Const BRICKS_BASE_TIME:Float = 1
+	Const BRICKS_BASE_TIME:Float = 10
 	
 	Const BRICKS_GREEN_ZONE:Float = 0.25
 	
