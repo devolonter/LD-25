@@ -27,6 +27,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PROFESSORS_BASE_TIME:Float = 4
 	
+	Const PROFESSORS_MIN_TIME:Float = 2
+	
 	Const PROFESSORS_TIME_ZONE:Float = 2
 	
 	Const PROFESSORS_BASE_AMOUNT:Float = 5
@@ -47,7 +49,11 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const BRICKS_BASE_TIME:Float = 10
 	
-	Const BRICKS_GREEN_ZONE:Float = 0.25
+	Const BRICKS_MIN_TIME:Float = 2
+	
+	Const BRICKS_TIME_ZONE:Float = 2
+	
+	Const BRICKS_CREATION_ZONE:Float = 0.25
 	
 	Const BONUSES_BASE_TIME:Float = 20
 	
@@ -187,18 +193,20 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 			End If
 		Next
 
-		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor) - FlxG.Random() * PROFESSORS_TIME_ZONE * complexityFactor, 1, Self)
+		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * PROFESSORS_TIME_ZONE - PROFESSORS_TIME_ZONE), 1, Self)
+		professorsTimer.time = Max(professorsTimer.time, PROFESSORS_MIN_TIME)
 	End Method
 	
 	Method GenerateBrick:Void()
 		Local brick:Brick = Brick(bricks.Recycle(ClassInfo(Brick.ClassObject)))
-		Local x:Float = player.x + FlxG.Width * BRICKS_GREEN_ZONE * (1 - complexityFactor) * Floor(FlxG.Random() * 2 - 1)
+		Local x:Float = player.x + FlxG.Width * BRICKS_CREATION_ZONE * (1 - complexityFactor) * Floor(FlxG.Random() * 2 - 1)
 		x = Min(Max(x, 0.0), FlxG.Width - brick.width)
 		
 		brick.Reset(x, -brick.height)
 		brick.acceleration.y = GRAVITY
 		
-		bricksTimer.Start(BRICKS_BASE_TIME * (1 - complexityFactor), 1, Self)
+		bricksTimer.Start(BRICKS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * BRICKS_TIME_ZONE - BRICKS_TIME_ZONE), 1, Self)
+		bricksTimer.time = Max(bricksTimer.time, BRICKS_MIN_TIME)
 	End Method
 	
 	Method GenerateBonus:Void()
