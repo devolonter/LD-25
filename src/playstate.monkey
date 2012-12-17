@@ -29,7 +29,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PLAYER_MAX_POISONS_AMOUNT:Int = 3
 	
-	Const PROFESSORS_BASE_TIME:Float = 4
+	Const PROFESSORS_BASE_TIME:Float = 5
 	
 	Const PROFESSORS_MIN_TIME:Float = 2.5
 	
@@ -78,7 +78,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const BONUS_INVICIBILITY_CHANCE:Int = 40
 	
-	Const BONUS_BOTTLE_CHANCE:Int = 60
+	Const BONUS_BOTTLE_CHANCE:Int = 55
 	
 	Const BONUS_LIFE_CHANCE:Int = 70
 	
@@ -234,10 +234,27 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 					ladder = Min(Int(FlxG.Random() * 3), 2)
 				End If
 				
+				Local neighborY:Float = 0
+				Local offsetY:Float = FlxG.Height
+				
+				For Local i:Int = 0 Until professors.Length
+					professor = Professor(professors.Members[i])
+					
+					If (professor.ladder = ladder) Then
+						If (neighborY < professor.y) Then
+							neighborY = professor.y
+						End If
+					End If
+				End If
+				
 				professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
 				
+				If (FlxG.Height - neighborY < professor.height * 1.5) Then
+					offsetY = neighborY + professor.height * 1.5
+				End If
+				
 				professor.ladder = ladder
-				professor.Reset(77 + ladder * 143, FlxG.Height)
+				professor.Reset(77 + ladder * 143, offsetY)
 				professor.velocity.y = - (PROFESSORS_MAX_VELOCITY_Y - PROFESSORS_BASE_VELOCITY_Y) * complexityFactor * complexityFactor - PROFESSORS_BASE_VELOCITY_Y
 				professor.maxVelocity.x = PROFESSORS_VELOCITY_X
 			End If
@@ -277,7 +294,6 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
 		bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 100) + 10, -bonus.height)
 		bonus.acceleration.y = GRAVITY
-		'bonus.Type = FlxG.Random() * Bonus.SPEED_UP
 		bonus.lifeTime = BONUSES_BASE_LIFETIME * (1 - complexityFactor)
 		bonus.Flicker(0)
 		
@@ -353,7 +369,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		If (complexityFactor < BONUSES_BAD_FACTOR) Then
 			Local chance:Float = FlxG.Random()
 			
-			If (chance < 0.3) Then
+			If (chance < 0.2) Then
 				type = Bonus.BOTTLE
 			ElseIf(chance < 0.7)
 				type = Bonus.SPEED_DOWN
