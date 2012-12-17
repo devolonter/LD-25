@@ -18,7 +18,7 @@ Class Player Extends FlxSprite
 	Method New(lifeBar:Bar, poisonBar:Bar, poisons:FlxGroup)
 		Super.New(0, 0)
 		
-		LoadGraphic("player", True, True, 80, 40)
+		LoadGraphic("player", True, True, 40, 80)
 		AddAnimation("run",[0, 1, 2, 3], 8)
 		
 		maxVelocity.x = 200
