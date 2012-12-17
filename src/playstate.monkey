@@ -27,6 +27,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PLAYER_FLICKER_TIME:Float = 5
 	
+	Const PLAYER_MAX_POISONS_AMOUNT:Int = 3
+	
 	Const PROFESSORS_BASE_TIME:Float = 4
 	
 	Const PROFESSORS_MIN_TIME:Float = 2
@@ -43,9 +45,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PROFESSORS_MAX_VELOCITY_Y:Float = 100
 	
-	Const PROFFESORS_ONE_LIMIT_FACTOR:Float = 0.25
+	Const PROFESORS_ONE_LIMIT_FACTOR:Float = 0.25
 	
-	Const PROFFESORS_TWO_LIMIT_FACTOR:Float = 0.5
+	Const PROFESORS_TWO_LIMIT_FACTOR:Float = 0.5
 	
 	Const BRICKS_START_FACTOR:Float = 0.25
 	
@@ -57,7 +59,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const BRICKS_CREATION_ZONE:Float = 0.25
 	
-	Const BONUSES_BASE_TIME:Float = 5'20
+	Const BONUSES_BASE_TIME:Float = 20
 	
 	Const BONUSES_BASE_LIFETIME:Float = 10
 	
@@ -66,6 +68,21 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Const BONUS_EARTHQUAKE_DURATION:Float = 10
 	
 	Const BONUS_SPEED_UP_DOWN_DURATION:Float = 10
+	
+'Chances scale
+	Const BONUS_BOMB_CHANCE:Int = 5
+	
+	Const BONUS_EARTHQUAKE_CHANCE:Int = 30
+	
+	Const BONUS_INVICIBILITY_CHANCE:Int = 45
+	
+	Const BONUS_BOTTLE_CHANCE:Int = 50
+	
+	Const BONUS_LIFE_CHANCE:Int = 55
+	
+	Const BONUS_SPEED_DOWN_CHANCE:Int = 70
+	
+	Const BONUS_SPEED_UP_CHANCE:Int = 100
 'End consts
 
 	Global Shaking:Float = 0
@@ -182,9 +199,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Local count:Int = FlxG.Random() * 2 + 1
 		count = Min(count, 3)
 		
-		If (complexityFactor < PROFFESORS_ONE_LIMIT_FACTOR) Then
+		If (complexityFactor < PROFESORS_ONE_LIMIT_FACTOR) Then
 			count = 1
-		ElseIf(complexityFactor < PROFFESORS_TWO_LIMIT_FACTOR And count > 1) Then
+		ElseIf(complexityFactor < PROFESORS_TWO_LIMIT_FACTOR And count > 1) Then
 			count = 2
 		End If
 		
@@ -252,10 +269,82 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
 		bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 100) + 10, -bonus.height)
 		bonus.acceleration.y = GRAVITY
-		bonus.Type = FlxG.Random() * Bonus.SPEED_UP
+		'bonus.Type = FlxG.Random() * Bonus.SPEED_UP
 		bonus.lifeTime = BONUSES_BASE_LIFETIME * (1 - complexityFactor)
 		bonus.Flicker(0)
 		
+		Local type:Int = FlxG.Random() * 100
+		
+		Print type
+		
+		If (type <= BONUS_BOMB_CHANCE Or type = Bonus.BOMB) Then
+			Local sumY:Float = 0
+			Local minY:Float = 0
+			Local professor:Professor
+		
+			For Local i:Int = 0 Until professors.Length
+				professor = Professor(professors.Members[i])
+			
+				If (professor.alive And professor.velocity.x = 0) Then
+					sumY += professor.y
+					minY += HEIGHT
+				End If
+			Next
+			
+			minY = Max(minY, HEIGHT)
+			Local chance:Float = (sumY / minY) * FlxG.Random()
+			
+			If (chance < 0.5) Then
+				type = Bonus.BOMB
+			Else
+				type = Bonus.BOMB + FlxG.Random() * (Bonus.SPEED_UP - Bonus.BOMB)
+			End If
+		End If
+		
+		If (type > BONUS_BOMB_CHANCE And type <= BONUS_EARTHQUAKE_CHANCE) Then
+			type = Bonus.EARTHQUAKE
+		End If
+		
+		If (type > BONUS_EARTHQUAKE_CHANCE And type <= BONUS_INVICIBILITY_CHANCE) Then
+			type = Bonus.INVICIBILITY
+		End If
+
+		If (type > BONUS_INVICIBILITY_CHANCE And type <= BONUS_BOTTLE_CHANCE) Then
+			If (poisonBar.Max >= PLAYER_MAX_POISONS_AMOUNT) Then
+				type = FlxG.Random() * Bonus.SPEED_UP
+				
+				If (type = Bonus.BOTTLE) Then
+					If (FlxG.Random() > 0.5) Then
+						type = Bonus.EARTHQUAKE
+					Else
+						type = Bonus.SPEED_UP
+					End If
+					
+				End If
+			Else
+				type = Bonus.BOTTLE
+			End If
+		End If
+		
+		If (type > BONUS_BOTTLE_CHANCE And type <= BONUS_LIFE_CHANCE) Then
+			Local chance:Float = (lifeBar.Value / lifeBar.Max) * FlxG.Random() * 3
+			
+			If (chance > 0.5) Then
+				type = Bonus.LIFE
+			Else
+				type = Bonus.LIFE + FlxG.Random() * (Bonus.SPEED_UP - Bonus.LIFE)
+			End If
+		End If
+		
+		If (type > BONUS_LIFE_CHANCE And type <= BONUS_SPEED_DOWN_CHANCE) Then
+			type = Bonus.SPEED_DOWN
+		End If
+		
+		If (type > BONUS_SPEED_DOWN_CHANCE And type <= BONUS_SPEED_UP_CHANCE) Then
+			type = Bonus.SPEED_UP
+		End If
+		
+		bonus.Type = Min(type, Bonus.SPEED_UP)
 		bonusesTimer.Start(BONUSES_BASE_TIME * (1 + complexityFactor) * (1 + FlxG.Random() * complexityFactor), 1, Self)
 	End Method
 	

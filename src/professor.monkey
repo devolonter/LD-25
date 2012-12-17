@@ -39,11 +39,10 @@ Class Professor Extends FlxSprite
 	Method PostUpdate:Void()
 		Super.PostUpdate()
 		
-		If (PlayState.SpeedUp > 0) Then
-			y = last.y - (last.y - y) * 2
-			
-		ElseIf(PlayState.SpeedDown > 0) Then
+		If (PlayState.SpeedDown > 0) Then
 			y = last.y - (last.y - y) * 0.5
+		ElseIf(PlayState.SpeedUp > 0) Then			
+			y = last.y - (last.y - y) * 2
 		End If
 	End Method
 

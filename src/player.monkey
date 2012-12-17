@@ -103,7 +103,7 @@ Class Player Extends FlxSprite
 				professors.Kill()
 				professors.Revive()
 			
-			Case Bonus.EARTHQUAKE
+			Case Bonus.EARTHQUAKE				
 				PlayState.Shaking = PlayState.BONUS_EARTHQUAKE_DURATION
 				FlxG.Shake(0.005, PlayState.BONUS_EARTHQUAKE_DURATION)
 		
