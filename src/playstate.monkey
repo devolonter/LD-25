@@ -25,6 +25,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PLAYER_MAX_VELOCITY:Float = 150
 	
+	Const PLAYER_FLICKER_TIME:Float = 5
+	
 	Const PROFESSORS_BASE_TIME:Float = 4
 	
 	Const PROFESSORS_MIN_TIME:Float = 2
@@ -55,10 +57,22 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const BRICKS_CREATION_ZONE:Float = 0.25
 	
-	Const BONUSES_BASE_TIME:Float = 20
+	Const BONUSES_BASE_TIME:Float = 5'20
 	
 	Const BONUSES_BASE_LIFETIME:Float = 10
+	
+	Const BONUS_INVICIBILITY_DURATION:Float = 10
+	
+	Const BONUS_EARTHQUAKE_DURATION:Float = 10
+	
+	Const BONUS_SPEED_UP_DOWN_DURATION:Float = 10
 'End consts
+
+	Global Shaking:Float = 0
+	
+	Global SpeedUp:Float = 0
+	
+	Global SpeedDown:Float = 0
 		
 	Field walls:Walls
 	
@@ -97,21 +111,23 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		poisonBar.Value = 1
 		lifeBar = New Bar(FlxG.Width - 10, 10, "lifebar", 5, Bar.RIGHT_TO_LEFT)
 		
-		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
+		barrels = Barrels(Add(New Barrels(HEIGHT + 2, poisonBar)))
 		poisons = New Poisons()
+		
+		professors = New Professors()
 				
 		bricks = Bricks(Add(New Bricks()))
 		bonuses = Bonuses(Add(New Bonuses()))
 		
-		player = New Player(lifeBar, poisonBar, poisons)
+		player = New Player(lifeBar, poisonBar, poisons, professors)
 		player.Reset( (FlxG.Width - player.width) * 0.5, HEIGHT - player.height)
 		Add(player)
 		
 		Add(poisonBar)
 		Add(lifeBar)
 		
-		Add(New FlxSprite(0, HEIGHT - 2, "floor"))
-		professors = Professors(Add(New Professors()))
+		Add(New FlxSprite(0, HEIGHT, "floor"))
+		Add(professors)
 		Add(poisons)
 		
 		professorsTimer = New FlxTimer()
@@ -131,6 +147,19 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Method Update:Void()
 		If ( Not player.alive) Then
 			Error "Game Over!"
+		End If
+		
+		If (Shaking > 0) Then
+			Shaking -= FlxG.Elapsed
+			If (Shaking <= 0) FlxG.Camera.StopFX()
+		End If
+		
+		If (SpeedUp > 0) Then
+			SpeedUp -= FlxG.Elapsed
+		End If
+		
+		If (SpeedDown > 0) Then
+			SpeedDown -= FlxG.Elapsed
 		End If
 	
 		FlxG.Overlap(barrels, player, barrels)
@@ -205,7 +234,12 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		brick.Reset(x, -brick.height)
 		brick.acceleration.y = GRAVITY
 		
-		bricksTimer.Start(BRICKS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * BRICKS_TIME_ZONE - BRICKS_TIME_ZONE), 1, Self)
+		If (Shaking > 0) Then
+			bricksTimer.Start(BRICKS_BASE_TIME * 0.1 + (FlxG.Random() * BRICKS_TIME_ZONE - BRICKS_TIME_ZONE), 1, Self)
+		Else
+			bricksTimer.Start(BRICKS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * BRICKS_TIME_ZONE - BRICKS_TIME_ZONE), 1, Self)
+		End If
+	
 		bricksTimer.time = Max(bricksTimer.time, BRICKS_MIN_TIME)
 	End Method
 	
@@ -216,8 +250,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		End If
 	
 		Local bonus:Bonus = Bonus(bonuses.Recycle(ClassInfo(Bonus.ClassObject)))
-		bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 20) + 10, -bonus.height)
+		bonus.Reset(FlxG.Random() * (FlxG.Width - bonus.width - 100) + 10, -bonus.height)
 		bonus.acceleration.y = GRAVITY
+		bonus.Type = FlxG.Random() * Bonus.SPEED_UP
 		bonus.lifeTime = BONUSES_BASE_LIFETIME * (1 - complexityFactor)
 		bonus.Flicker(0)
 		
@@ -232,6 +267,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 				GenerateProfessor()
 				
 				If (complexityFactor > BRICKS_START_FACTOR And Not bricksTimer.TimeLeft) Then
+					GenerateBrick()
+				ElseIf(Shaking > 0) Then
 					GenerateBrick()
 				End If
 			Case bricksTimer

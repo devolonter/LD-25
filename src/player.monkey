@@ -4,6 +4,7 @@ Import flixel
 Import bar
 Import poison
 Import playstate
+Import bonus
 
 Class Player Extends FlxSprite
 
@@ -13,9 +14,11 @@ Class Player Extends FlxSprite
 	
 	Field poisons:FlxGroup
 	
+	Field professors:FlxGroup
+	
 	Field poison:Poison
 	
-	Method New(lifeBar:Bar, poisonBar:Bar, poisons:FlxGroup)
+	Method New(lifeBar:Bar, poisonBar:Bar, poisons:FlxGroup, professors:FlxGroup)
 		Super.New(0, 0)
 		
 		LoadGraphic("player", True, True, 40, 80)
@@ -28,6 +31,7 @@ Class Player Extends FlxSprite
 		Self.lifeBar = lifeBar
 		Self.poisonBar = poisonBar
 		Self.poisons = poisons
+		Self.professors = professors
 	End Method
 	
 	Method Update:Void()	
@@ -89,8 +93,35 @@ Class Player Extends FlxSprite
 		If (lifeBar.Value <= 0) Then
 			Kill()
 		Else
-			Flicker(5)
+			Flicker(PlayState.PLAYER_FLICKER_TIME)
 		End If
+	End Method
+	
+	Method ActivateBonus:Void(bonus:FlxObject)
+		Select(Bonus(bonus).Type)
+			Case Bonus.BOMB
+				professors.Kill()
+				professors.Revive()
+			
+			Case Bonus.EARTHQUAKE
+				PlayState.Shaking = PlayState.BONUS_EARTHQUAKE_DURATION
+				FlxG.Shake(0.005, PlayState.BONUS_EARTHQUAKE_DURATION)
+		
+			Case Bonus.INVICIBILITY
+				Flicker(PlayState.BONUS_INVICIBILITY_DURATION)
+				
+			Case Bonus.BOTTLE
+				poisonBar.AddItem()
+				
+			Case Bonus.LIFE
+				lifeBar.Value += 1
+				
+			Case Bonus.SPEED_DOWN
+				PlayState.SpeedDown = PlayState.BONUS_SPEED_UP_DOWN_DURATION
+				
+			Case Bonus.SPEED_UP
+				PlayState.SpeedUp = PlayState.BONUS_SPEED_UP_DOWN_DURATION
+		End Select
 	End Method
 
 

@@ -15,6 +15,11 @@ Class Professor Extends FlxSprite
 		ladder = 0
 	End Method
 	
+	Method Reset:Void(x:Float, y:Float)
+		Super.Reset(x, y)
+		
+	End Method
+	
 	Method Update:Void()
 		If (velocity.y < 0) Then
 			If (y + height < PlayState.HEIGHT) Then
@@ -28,6 +33,17 @@ Class Professor Extends FlxSprite
 			End If
 		ElseIf(x < 0 Or x > FlxG.Width - width) Then
 			velocity.x = -velocity.x
+		End If
+	End Method
+	
+	Method PostUpdate:Void()
+		Super.PostUpdate()
+		
+		If (PlayState.SpeedUp > 0) Then
+			y = last.y - (last.y - y) * 2
+			
+		ElseIf(PlayState.SpeedDown > 0) Then
+			y = last.y - (last.y - y) * 0.5
 		End If
 	End Method
 

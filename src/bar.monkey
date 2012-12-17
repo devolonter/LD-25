@@ -63,7 +63,7 @@ Public
 	End Method
 	
 	Method Value:Void(newValue:Int) Property
-		If (value = newValue) Return
+		If (value = newValue Or newValue > max) Return
 		
 		For Local i:Int = 0 Until max
 			If (i < newValue) Then
