@@ -465,15 +465,15 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\barrel.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>67</X>
-        <Y>26</Y>
+        <X>19</X>
+        <Y>39</Y>
       </CursorPos>
       <OutLiningSerialization>
         <Folding_Nodes_Collection>
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>9</X>
-            <Y>49</Y>
+            <Y>65</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>0</ASTNestingLevel>
@@ -488,13 +488,28 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>4</X>
-            <Y>22</Y>
+            <Y>36</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
             <X>13</X>
-            <Y>12</Y>
+            <Y>14</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>6</X>
+            <Y>32</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>2</ASTNestingLevel>
+          <StartPoint>
+            <X>11</X>
+            <Y>25</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -503,43 +518,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>11</X>
-            <Y>27</Y>
+            <Y>42</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
             <X>36</X>
-            <Y>24</Y>
-          </StartPoint>
-          <Text>...</Text>
-          <Expanded>true</Expanded>
-        </Folding_Nodes_Collection>
-        <Folding_Nodes_Collection>
-          <Collapsed_Text>...</Collapsed_Text>
-          <EndPoint>
-            <X>11</X>
-            <Y>32</Y>
-          </EndPoint>
-          <IsEmpty>false</IsEmpty>
-          <ASTNestingLevel>1</ASTNestingLevel>
-          <StartPoint>
-            <X>19</X>
-            <Y>29</Y>
-          </StartPoint>
-          <Text>...</Text>
-          <Expanded>true</Expanded>
-        </Folding_Nodes_Collection>
-        <Folding_Nodes_Collection>
-          <Collapsed_Text>...</Collapsed_Text>
-          <EndPoint>
-            <X>11</X>
-            <Y>37</Y>
-          </EndPoint>
-          <IsEmpty>false</IsEmpty>
-          <ASTNestingLevel>1</ASTNestingLevel>
-          <StartPoint>
-            <X>25</X>
-            <Y>34</Y>
+            <Y>38</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -553,8 +538,38 @@
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
+            <X>19</X>
+            <Y>44</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>11</X>
+            <Y>52</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>1</ASTNestingLevel>
+          <StartPoint>
+            <X>25</X>
+            <Y>49</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>11</X>
+            <Y>63</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>1</ASTNestingLevel>
+          <StartPoint>
             <X>21</X>
-            <Y>39</Y>
+            <Y>54</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -563,13 +578,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>24</X>
-            <Y>40</Y>
+            <Y>56</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>2</ASTNestingLevel>
           <StartPoint>
             <X>17</X>
-            <Y>40</Y>
+            <Y>56</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -578,13 +593,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>8</X>
-            <Y>44</Y>
+            <Y>60</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>2</ASTNestingLevel>
           <StartPoint>
             <X>25</X>
-            <Y>42</Y>
+            <Y>58</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -595,7 +610,7 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>9</X>
-            <Y>49</Y>
+            <Y>65</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>0</ASTNestingLevel>
@@ -610,13 +625,28 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>4</X>
-            <Y>22</Y>
+            <Y>36</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
             <X>13</X>
-            <Y>12</Y>
+            <Y>14</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>6</X>
+            <Y>32</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>2</ASTNestingLevel>
+          <StartPoint>
+            <X>11</X>
+            <Y>25</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -625,43 +655,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>11</X>
-            <Y>27</Y>
+            <Y>42</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
             <X>36</X>
-            <Y>24</Y>
-          </StartPoint>
-          <Text>...</Text>
-          <Expanded>true</Expanded>
-        </Folding_Nodes_Collection>
-        <Folding_Nodes_Collection>
-          <Collapsed_Text>...</Collapsed_Text>
-          <EndPoint>
-            <X>11</X>
-            <Y>32</Y>
-          </EndPoint>
-          <IsEmpty>false</IsEmpty>
-          <ASTNestingLevel>1</ASTNestingLevel>
-          <StartPoint>
-            <X>19</X>
-            <Y>29</Y>
-          </StartPoint>
-          <Text>...</Text>
-          <Expanded>true</Expanded>
-        </Folding_Nodes_Collection>
-        <Folding_Nodes_Collection>
-          <Collapsed_Text>...</Collapsed_Text>
-          <EndPoint>
-            <X>11</X>
-            <Y>37</Y>
-          </EndPoint>
-          <IsEmpty>false</IsEmpty>
-          <ASTNestingLevel>1</ASTNestingLevel>
-          <StartPoint>
-            <X>25</X>
-            <Y>34</Y>
+            <Y>38</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -675,8 +675,38 @@
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>1</ASTNestingLevel>
           <StartPoint>
+            <X>19</X>
+            <Y>44</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>11</X>
+            <Y>52</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>1</ASTNestingLevel>
+          <StartPoint>
+            <X>25</X>
+            <Y>49</Y>
+          </StartPoint>
+          <Text>...</Text>
+          <Expanded>true</Expanded>
+        </Folding_Nodes_Collection>
+        <Folding_Nodes_Collection>
+          <Collapsed_Text>...</Collapsed_Text>
+          <EndPoint>
+            <X>11</X>
+            <Y>63</Y>
+          </EndPoint>
+          <IsEmpty>false</IsEmpty>
+          <ASTNestingLevel>1</ASTNestingLevel>
+          <StartPoint>
             <X>21</X>
-            <Y>39</Y>
+            <Y>54</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -685,13 +715,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>24</X>
-            <Y>40</Y>
+            <Y>56</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>2</ASTNestingLevel>
           <StartPoint>
             <X>17</X>
-            <Y>40</Y>
+            <Y>56</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -700,13 +730,13 @@
           <Collapsed_Text>...</Collapsed_Text>
           <EndPoint>
             <X>8</X>
-            <Y>44</Y>
+            <Y>60</Y>
           </EndPoint>
           <IsEmpty>false</IsEmpty>
           <ASTNestingLevel>2</ASTNestingLevel>
           <StartPoint>
             <X>25</X>
-            <Y>42</Y>
+            <Y>58</Y>
           </StartPoint>
           <Text>...</Text>
           <Expanded>true</Expanded>
@@ -717,7 +747,7 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\barrels.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>20</X>
+        <X>16</X>
         <Y>10</Y>
       </CursorPos>
       <OutLiningSerialization>
@@ -1257,8 +1287,8 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\game.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>28</X>
-        <Y>17</Y>
+        <X>58</X>
+        <Y>26</Y>
       </CursorPos>
       <OutLiningSerialization>
         <Folding_Nodes_Collection>
@@ -1359,8 +1389,8 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\player.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>2</X>
-        <Y>26</Y>
+        <X>0</X>
+        <Y>8</Y>
       </CursorPos>
       <OutLiningSerialization>
         <Folding_Nodes_Collection>
@@ -2981,6 +3011,47 @@
     <FolderStatus NodePath="LD25\main.build\html5\data\images" Expanded="false" />
     <FolderStatus NodePath="LD25\main.build\html5\data\music" Expanded="false" />
     <FolderStatus NodePath="LD25\main.build\html5\data\sounds" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\Windows Phone" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\Windows Phone\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\x86" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\x86\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\x86\Release" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\x86\Release\Content" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\x86\Release\Content\monkey" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\Xbox 360" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\bin\Xbox 360\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Windows Phone" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Windows Phone\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Windows Phone\Debug\TempPE" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\x86" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\x86\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\x86\Debug\TempPE" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\x86\Release" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Xbox 360" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Xbox 360\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\obj\Xbox 360\Debug\TempPE" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\Properties" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGame\Service References" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\bin" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\bin\x86" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\bin\x86\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\bin\x86\Release" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\monkey" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\monkey\fonts" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\monkey\images" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\monkey\music" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\monkey\sounds" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\obj" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\obj\x86" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\obj\x86\Debug" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\obj\x86\Debug\TempPE" Expanded="false" />
+    <FolderStatus NodePath="LD25\main.build\xna\MonkeyGame\MonkeyGameContent\obj\x86\Release" Expanded="false" />
     <FolderStatus NodePath="LD25\main.data" Expanded="false" />
     <FolderStatus NodePath="LD25\main.data\fonts" Expanded="false" />
     <FolderStatus NodePath="LD25\main.data\images" Expanded="false" />
