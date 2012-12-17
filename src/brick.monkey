@@ -7,8 +7,7 @@ Class Brick Extends FlxSprite
 	Global ClassObject:Object
 	
 	Method New()
-		Super.New(0, 0)
-		MakeGraphic(30, 15)
+		Super.New(0, 0, "brick")
 	End Method
 
 End Class

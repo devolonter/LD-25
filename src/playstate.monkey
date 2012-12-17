@@ -43,9 +43,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PROFFESORS_TWO_LIMIT_FACTOR:Float = 0.5
 	
-	Const BRICKS_START_FACTOR:Float = 0.25
+	Const BRICKS_START_FACTOR:Float = 0
 	
-	Const BRICKS_BASE_TIME:Float = 10
+	Const BRICKS_BASE_TIME:Float = 1
 	
 	Const BRICKS_GREEN_ZONE:Float = 0.25
 	
@@ -107,10 +107,6 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Add(New FlxSprite(0, HEIGHT - 2, "floor"))
 		professors = Professors(Add(New Professors()))
 		Add(poisons)
-		
-		Add(New FlxSprite(95, HEIGHT - 2, "stairs"))
-		Add(New FlxSprite(238, HEIGHT - 2, "stairs"))
-		Add(New FlxSprite(381, HEIGHT - 2, "stairs"))
 		
 		professorsTimer = New FlxTimer()
 		FlxTimer.Manager().Add(professorsTimer)
