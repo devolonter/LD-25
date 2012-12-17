@@ -8,7 +8,7 @@ Class Barrels Extends FlxGroup Implements FlxOverlapNotifyListener
 
 	Field barrel:Barrel
 	
-	Field poisonbar:Bar
+	Field poisonbar:Bar	
 
 	Method New(y:Float, poisonBar:Bar)
 		Super.New(2)

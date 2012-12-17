@@ -25,6 +25,8 @@ Class Game Extends FlxGame
 		FlxAssetsManager.AddImage("lifebar", "images/bar_life.png")
 		
 		FlxAssetsManager.AddImage("barrel", "images/barrel.png")
+		FlxAssetsManager.AddImage("barrel_smoke", "images/barrel_smoke.png")
+		
 		FlxAssetsManager.AddImage("poisonbar", "images/bar_poison.png")
 		
 		FlxAssetsManager.AddImage("professor", "images/professor.png")
