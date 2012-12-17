@@ -25,7 +25,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PLAYER_MAX_VELOCITY:Float = 150
 	
-	Const PROFESSORS_BASE_TIME:Float = 3
+	Const PROFESSORS_BASE_TIME:Float = 4
+	
+	Const PROFESSORS_TIME_ZONE:Float = 2
 	
 	Const PROFESSORS_BASE_AMOUNT:Float = 5
 	
@@ -188,8 +190,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 				professor.maxVelocity.x = PROFESSORS_VELOCITY_X
 			End If
 		Next
-		
-		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor), 1, Self)
+
+		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor) - FlxG.Random() * PROFESSORS_TIME_ZONE * complexityFactor, 1, Self)
 	End Method
 	
 	Method GenerateBrick:Void()
