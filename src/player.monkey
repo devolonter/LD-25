@@ -19,9 +19,9 @@ Class Player Extends FlxSprite
 		Super.New(0, 0)
 		
 		LoadGraphic("player", True, True, 40, 80)
-		AddAnimation("run",[0, 1, 2, 3], 8)
+		AddAnimation("run",[0, 1, 2, 3, 4, 5, 6, 7], PlayState.PLAYER_MAX_VELOCITY / 12)
 		
-		maxVelocity.x = 200
+		maxVelocity.x = PlayState.PLAYER_MAX_VELOCITY
 		drag.x = maxVelocity.x * 10
 		acceleration.y = PlayState.GRAVITY
 		
@@ -43,7 +43,7 @@ Class Player Extends FlxSprite
 		
 		If (velocity.y = 0) Then
 			If (FlxG.Keys.JustPressed(KEY_UP))
-				velocity.y -= acceleration.y * 0.6
+				velocity.y -= acceleration.y * 0.5
 				
 			ElseIf(FlxG.Keys.JustPressed(KEY_Z) Or FlxG.Keys.JustPressed(KEY_X)) Then
 				If (poisonBar.Value > 0) Then
@@ -54,9 +54,9 @@ Class Player Extends FlxSprite
 					poison.velocity.x = 0
 					
 					If (Facing = LEFT) Then
-						poison.Reset(x - 10, y + 10)
+						poison.Reset(x - poison.width + 7, y + height * 0.4)
 					Else
-						poison.Reset(x + width + 10, y + 10)
+						poison.Reset(x + width - 7, y + height * 0.4)
 					End If
 				
 					If (FlxG.Keys.JustPressed(KEY_Z)) Then
@@ -72,7 +72,9 @@ Class Player Extends FlxSprite
 			End If
 		End If
 		
-		If (velocity.x = 0 Or velocity.y <> 0) Then
+		If (velocity.y <> 0) Then
+			Frame = 7
+		ElseIf(velocity.x = 0) Then
 			Frame = 0
 		Else
 			Play("run")

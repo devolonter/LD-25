@@ -21,21 +21,25 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const GRAVITY:Float = 550
 	
-	Const COMPLEXITY_FACTOR_INC:Float = 0.02
+	Const COMPLEXITY_FACTOR_INC:Float = 0.01
 	
-	Const PROFESSORS_BASE_TIME:Float = 4
+	Const PLAYER_MAX_VELOCITY:Float = 150
+	
+	Const PROFESSORS_BASE_TIME:Float = 3
 	
 	Const PROFESSORS_BASE_AMOUNT:Float = 5
 	
-	Const PROFESSORS_MAX_AMOUNT:Float = 15
+	Const PROFESSORS_MAX_AMOUNT:Float = 10
 	
-	Const PROFESSORS_BASE_VELOCITY_Y:Float = 30
+	Const PROFESSORS_BASE_VELOCITY_Y:Float = 20
 	
-	Const PROFESSORS_BASE_VELOCITY_X:Float = 100
+	Const PROFESSORS_VELOCITY_X:Float = 70
 	
-	Const PROFESSORS_MAX_VELOCITY_X:Float = 200
+	Const PROFESSORS_MAX_VELOCITY_Y:Float = 100
 	
-	Const PROFESSORS_MAX_VELOCITY_Y:Float = 150
+	Const PROFFESORS_ONE_LIMIT_FACTOR:Float = 0.25
+	
+	Const PROFFESORS_TWO_LIMIT_FACTOR:Float = 0.5
 	
 	Const BRICKS_START_FACTOR:Float = 0.25
 	
@@ -142,37 +146,48 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	End Method
 	
 	Method GenerateProfessor:Void()
-		If (professors.CountLiving() < Int(PROFESSORS_BASE_AMOUNT + (PROFESSORS_MAX_AMOUNT - PROFESSORS_BASE_AMOUNT) * complexityFactor)) Then
-			Local ladder:Int
-			Local professor:Professor
-			
-			ladders[0] = 0; ladders[1] = 0; ladders[2] = 0
-			
-			For Local i:Int = 0 Until professors.Length
-				professor = Professor(professors.Members[i])
-			
-				If (professor.alive And professor.velocity.x = 0) Then
-					ladders[professor.ladder] += 1
-				End If
-			Next
-			
-			If (ladders[0] < ladders[1] And ladders[0] < ladders[2]) Then
-				ladder = 0
-			ElseIf(ladders[1] < ladders[0] And ladders[1] < ladders[2]) Then
-				ladder = 1
-			ElseIf(ladders[2] < ladders[0] And ladders[2] < ladders[1]) Then
-				ladder = 2
-			Else
-				ladder = Min(Int(FlxG.Random() * 3), 2)
-			End If
-			
-			professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
-			
-			professor.ladder = ladder
-			professor.Reset(77 + ladder * 143, FlxG.Height)
-			professor.velocity.y = - (PROFESSORS_MAX_VELOCITY_Y - PROFESSORS_BASE_VELOCITY_Y) * complexityFactor - PROFESSORS_BASE_VELOCITY_Y
-			professor.maxVelocity.x = (PROFESSORS_MAX_VELOCITY_X - PROFESSORS_BASE_VELOCITY_X) * complexityFactor + PROFESSORS_BASE_VELOCITY_X
+		Local count:Int = FlxG.Random() * 2 + 1
+		count = Min(count, 3)
+		
+		If (complexityFactor < PROFFESORS_ONE_LIMIT_FACTOR) Then
+			count = 1
+		ElseIf(complexityFactor < PROFFESORS_TWO_LIMIT_FACTOR And count > 1) Then
+			count = 2
 		End If
+		
+		For Local c:Int = 0 Until count
+			If (professors.CountLiving() < Int(PROFESSORS_BASE_AMOUNT + (PROFESSORS_MAX_AMOUNT - PROFESSORS_BASE_AMOUNT) * complexityFactor)) Then
+				Local ladder:Int
+				Local professor:Professor
+				
+				ladders[0] = 0; ladders[1] = 0; ladders[2] = 0
+				
+				For Local i:Int = 0 Until professors.Length
+					professor = Professor(professors.Members[i])
+				
+					If (professor.alive And professor.velocity.x = 0) Then
+						ladders[professor.ladder] += 1
+					End If
+				Next
+				
+				If (ladders[0] < ladders[1] And ladders[0] < ladders[2]) Then
+					ladder = 0
+				ElseIf(ladders[1] < ladders[0] And ladders[1] < ladders[2]) Then
+					ladder = 1
+				ElseIf(ladders[2] < ladders[0] And ladders[2] < ladders[1]) Then
+					ladder = 2
+				Else
+					ladder = Min(Int(FlxG.Random() * 3), 2)
+				End If
+				
+				professor = Professor(professors.Recycle(ClassInfo(Professor.ClassObject)))
+				
+				professor.ladder = ladder
+				professor.Reset(77 + ladder * 143, FlxG.Height)
+				professor.velocity.y = - (PROFESSORS_MAX_VELOCITY_Y - PROFESSORS_BASE_VELOCITY_Y) * complexityFactor * complexityFactor - PROFESSORS_BASE_VELOCITY_Y
+				professor.maxVelocity.x = PROFESSORS_VELOCITY_X
+			End If
+		Next
 		
 		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor), 1, Self)
 	End Method
