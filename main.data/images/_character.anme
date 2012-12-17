@@ -1,11 +1,11 @@
 application/x-vnd.lm_mohodoc
 version 37
 ### Created in Moho version 9.1, © 1999-2012 Smith Micro Software, Inc.
-### Created: Mon Dec 17 09:24:43 2012
+### Created: Mon Dec 17 09:31:59 2012
 #escaped_quotes
 
 ### static values
-dimensions 30 60
+dimensions 40 80
 frame_range 1 8
 fps 8
 back_color 234 234 234 255
@@ -13,7 +13,7 @@ noise_grain 0
 allow_3d true
 depth_sort false
 distance_sort false
-depth_of_field false 2 1 0.4
+depth_of_field false 2 1 0.3
 global_render_style 0 0 0 true
 stereo_mode 0
 stereo_separation -1
