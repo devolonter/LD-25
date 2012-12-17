@@ -117,9 +117,11 @@ Class Player Extends FlxSprite
 				lifeBar.Value += 1
 				
 			Case Bonus.SPEED_DOWN
+				If (PlayState.SpeedUp > 0) Return
 				PlayState.SpeedDown = PlayState.BONUS_SPEED_UP_DOWN_DURATION
 				
 			Case Bonus.SPEED_UP
+				If (PlayState.SpeedDown > 0) Return
 				PlayState.SpeedUp = PlayState.BONUS_SPEED_UP_DOWN_DURATION
 		End Select
 	End Method

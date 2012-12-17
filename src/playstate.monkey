@@ -31,7 +31,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const PROFESSORS_BASE_TIME:Float = 4
 	
-	Const PROFESSORS_MIN_TIME:Float = 2
+	Const PROFESSORS_MIN_TIME:Float = 2.5
 	
 	Const PROFESSORS_TIME_ZONE:Float = 2
 	
@@ -57,11 +57,13 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const BRICKS_TIME_ZONE:Float = 2
 	
-	Const BRICKS_CREATION_ZONE:Float = 0.25
+	Const BRICKS_CREATION_ZONE:Float = 0.3
 	
-	Const BONUSES_BASE_TIME:Float = 20
+	Const BONUSES_BASE_TIME:Float = 15
 	
 	Const BONUSES_BASE_LIFETIME:Float = 10
+	
+	Const BONUSES_BAD_FACTOR:Float = 0.1
 	
 	Const BONUS_INVICIBILITY_DURATION:Float = 10
 	
@@ -70,17 +72,17 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Const BONUS_SPEED_UP_DOWN_DURATION:Float = 10
 	
 'Chances scale
-	Const BONUS_BOMB_CHANCE:Int = 5
+	Const BONUS_BOMB_CHANCE:Int = 15
 	
 	Const BONUS_EARTHQUAKE_CHANCE:Int = 30
 	
-	Const BONUS_INVICIBILITY_CHANCE:Int = 45
+	Const BONUS_INVICIBILITY_CHANCE:Int = 40
 	
-	Const BONUS_BOTTLE_CHANCE:Int = 50
+	Const BONUS_BOTTLE_CHANCE:Int = 60
 	
-	Const BONUS_LIFE_CHANCE:Int = 55
+	Const BONUS_LIFE_CHANCE:Int = 70
 	
-	Const BONUS_SPEED_DOWN_CHANCE:Int = 70
+	Const BONUS_SPEED_DOWN_CHANCE:Int = 80
 	
 	Const BONUS_SPEED_UP_CHANCE:Int = 100
 'End consts
@@ -118,6 +120,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	Field complexityFactor:FLoat
 	
 	Field ladders:Int[3]
+	
+	Field lastBonusType:Int
 	
 	Method Create:Void()
 		Add(New FlxSprite(0, 0, "bg"))
@@ -157,7 +161,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		FlxTimer.Manager().Add(bonusesTimer)
 		
 		complexityFactor = 0
-		GenerateProfessor()
+		GenerateProfessor(True)
 		GenerateBonus()
 	End Method
 	
@@ -195,7 +199,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		FlxG.Collide(poisons, professors, poisons)
 	End Method
 	
-	Method GenerateProfessor:Void()
+	Method GenerateProfessor:Void(first:Bool = False)
 		Local count:Int = FlxG.Random() * 2 + 1
 		count = Min(count, 3)
 		
@@ -239,7 +243,11 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 			End If
 		Next
 
-		professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * PROFESSORS_TIME_ZONE - PROFESSORS_TIME_ZONE), 1, Self)
+		If ( Not first) Then
+			professorsTimer.Start(PROFESSORS_BASE_TIME * (1 - complexityFactor) + (FlxG.Random() * PROFESSORS_TIME_ZONE - PROFESSORS_TIME_ZONE), 1, Self)
+		Else
+				professorsTimer.Start(PROFESSORS_BASE_TIME * 2, 1, Self)
+		End If
 		professorsTimer.time = Max(professorsTimer.time, PROFESSORS_MIN_TIME)
 	End Method
 	
@@ -274,9 +282,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		bonus.Flicker(0)
 		
 		Local type:Int = FlxG.Random() * 100
-		
-		Print type
-		
+
 		If (type <= BONUS_BOMB_CHANCE Or type = Bonus.BOMB) Then
 			Local sumY:Float = 0
 			Local minY:Float = 0
@@ -327,9 +333,9 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		End If
 		
 		If (type > BONUS_BOTTLE_CHANCE And type <= BONUS_LIFE_CHANCE) Then
-			Local chance:Float = (lifeBar.Value / lifeBar.Max) * FlxG.Random() * 3
+			Local chance:Float = (lifeBar.Value / lifeBar.Max)
 			
-			If (chance > 0.5) Then
+			If (chance < 0.5) Then
 				type = Bonus.LIFE
 			Else
 				type = Bonus.LIFE + FlxG.Random() * (Bonus.SPEED_UP - Bonus.LIFE)
@@ -344,8 +350,25 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 			type = Bonus.SPEED_UP
 		End If
 		
+		If (complexityFactor < BONUSES_BAD_FACTOR) Then
+			Local chance:Float = FlxG.Random()
+			
+			If (chance < 0.3) Then
+				type = Bonus.BOTTLE
+			ElseIf(chance < 0.7)
+				type = Bonus.SPEED_DOWN
+			End If
+		End If
+		
 		bonus.Type = Min(type, Bonus.SPEED_UP)
-		bonusesTimer.Start(BONUSES_BASE_TIME * (1 + complexityFactor) * (1 + FlxG.Random() * complexityFactor), 1, Self)
+		
+		If (lastBonusType <> bonus.Type Or complexityFactor < BONUSES_BAD_FACTOR) Then
+			bonusesTimer.Start(BONUSES_BASE_TIME * (1 - complexityFactor) * (1 + FlxG.Random() * complexityFactor), 1, Self)
+			lastBonusType = bonus.Type
+		Else
+			bonus.Kill()
+			GenerateBonus()
+		End If
 	End Method
 	
 	Method OnTimerTick:Void(timer:FlxTimer)

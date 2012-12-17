@@ -41,7 +41,7 @@ Class Professor Extends FlxSprite
 		
 		If (PlayState.SpeedDown > 0) Then
 			y = last.y - (last.y - y) * 0.5
-		ElseIf(PlayState.SpeedUp > 0) Then			
+		ElseIf(PlayState.SpeedUp > 0) Then
 			y = last.y - (last.y - y) * 2
 		End If
 	End Method
