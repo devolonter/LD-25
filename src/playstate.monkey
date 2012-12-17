@@ -83,7 +83,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		poisonBar = New Bar(10, 10, "poisonbar", 5)
 		poisonBar.Max = 1
 		poisonBar.Value = 1
-		lifeBar = New Bar(FlxG.Width - 90, 10, "lifebar", 5)
+		lifeBar = New Bar(FlxG.Width - 10, 10, "lifebar", 5, Bar.RIGHT_TO_LEFT)
 		
 		barrels = Barrels(Add(New Barrels(HEIGHT, poisonBar)))
 		poisons = New Poisons()

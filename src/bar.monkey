@@ -4,6 +4,10 @@ Import flixel
 
 Class Bar Extends FlxBasic
 
+	Const LEFT_TO_RIGHT:Int = 1
+	
+	Const RIGHT_TO_LEFT:Int = -1
+
 	Field x:Float
 	
 	Field y:Float
@@ -19,29 +23,43 @@ Private
 	
 	Field items:FlxSprite[]
 	
+	Field dir:Int
+	
+	Field graphic:String
+	
 Public
-	Method New(x:Float, y:Float, graphic:String, countItems:Int)
+	Method New(x:Float, y:Float, graphic:String, countItems:Int, dir:Int = LEFT_TO_RIGHT)
 		Super.New()
 	
 		Self.x = x
 		Self.y = y
+		Self.dir = dir
+		Self.graphic = graphic
 	
 		items = items.Resize(countItems)
-		
-		Local sprite:FlxSprite
-		
 		For Local i:Int = 0 Until countItems
-			sprite = New FlxSprite(x, y)
-			sprite.LoadGraphic(graphic, True)
-			sprite.Reset(x + sprite.width * i, y)
-			sprite.Frame = 1
-			items[i] = sprite
+			AddItem()
 		Next
 		
-		width = sprite.width * countItems
-		height = sprite.height
-		max = countItems
 		Value = max
+	End Method
+	
+	Method AddItem:Void()
+		If (max = items.Length()) items = items.Resize(items.Length() +5)
+		
+		Local sprite:FlxSprite = New FlxSprite(0, 0)
+		sprite.LoadGraphic(graphic, True)
+		
+		Local offset:Float = 0
+		If (dir < 0) offset = -sprite.width
+		
+		sprite.Reset(x + offset + (sprite.width + 5) * max * dir, y)
+		sprite.Frame = 1
+		items[max] = sprite
+		
+		max += 1
+		width += sprite.width + 5
+		height = sprite.height
 	End Method
 	
 	Method Value:Void(newValue:Int) Property

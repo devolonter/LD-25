@@ -80,6 +80,8 @@ Class Player Extends FlxSprite
 	End Method
 	
 	Method Hurt:Void(damage:Float = 1)
+		If (Flickering) Return
+	
 		lifeBar.Value -= damage
 		
 		If (lifeBar.Value <= 0) Then
