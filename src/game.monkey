@@ -44,6 +44,9 @@ Class Game Extends FlxGame
 	
 		FlxTextFontMachineDriver.Init()
 		FlxText.SetDefaultDriver(GetClass("FlxTextFontMachineDriver"))
+		
+		Local defaultFont:FlxFont = FlxAssetsManager.AddFont("default", FlxText.DRIVER_FONTMACHINE)
+		defaultFont.SetPath(36, "fonts/default_" + 36 + ".txt")
 	End Method
 
 End Class
