@@ -28,7 +28,7 @@ Public
 			bubble.LoadGraphic("barrel_bubble")
 			bubble.scale.x = FlxG.Random() * 0.5 + 0.5
 			bubble.scale.y = bubble.scale.x
-			'buuble.visible = False
+			bubble.visible = False
 			bubbles.Add(bubble)
 		Next
 		

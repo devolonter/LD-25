@@ -2,6 +2,7 @@ Strict
 
 Import flixel
 Import player
+Import playstate
 
 Class Poisons Extends FlxGroup Implements FlxOverlapNotifyListener
 	
@@ -9,6 +10,9 @@ Class Poisons Extends FlxGroup Implements FlxOverlapNotifyListener
 		object1.Kill()
 		object2.Kill()
 		FlxG.Play("kill")
+		
+		FlxG.Score += 1
+		PlayState.Score.Text =FlxG.Score
 	End Method
 
 End Class

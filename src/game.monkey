@@ -1,7 +1,7 @@
 Strict
 
 Import flixel
-Import playstate
+Import menustate
 Import flixel.flxtext.driver.fontmachine
 
 Class Game Extends FlxGame
@@ -11,11 +11,12 @@ Class Game Extends FlxGame
 	Global MaxY:Float
 
 	Method New()
-		Super.New(480, 800, GetClass("PlayState"), 1, 60, 60)
-		forceDebugger = True
+		Super.New(480, 800, GetClass("MenuState"), 1, 60, 60)
 	End Method
 
 	Method OnContentInit:Void()
+		FlxAssetsManager.AddImage("title", "images/title.png")
+	
 		FlxAssetsManager.AddImage("bg", "images/bg.png")
 		FlxAssetsManager.AddImage("floor", "images/floor.png")
 	
@@ -39,8 +40,10 @@ Class Game Extends FlxGame
 		FlxAssetsManager.AddSound("brick", "sounds/brick." + FlxSound.GetValidExt())
 		FlxAssetsManager.AddSound("bonus", "sounds/bonus." + FlxSound.GetValidExt())
 		FlxAssetsManager.AddSound("shoot", "sounds/shoot." + FlxSound.GetValidExt())
+		FlxAssetsManager.AddSound("die", "sounds/die." + FlxSound.GetValidExt())
 		
 		FlxAssetsManager.AddMusic("mad", "music/mad." + FlxMusic.GetValidExt())
+		FlxAssetsManager.AddMusic("menu", "music/menu." + FlxMusic.GetValidExt())
 	
 		FlxTextFontMachineDriver.Init()
 		FlxText.SetDefaultDriver(GetClass("FlxTextFontMachineDriver"))

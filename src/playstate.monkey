@@ -13,8 +13,9 @@ Import poisons
 Import bricks
 Import bonuses
 Import bonus
+Import gameoverstate
 
-Class PlayState Extends FlxState Implements FlxTimerListener
+Class PlayState Extends FlxState Implements FlxTimerListener, FlxCameraFlashListener
 
 'Consts for game ballance
 	Const HEIGHT:Float = 300
@@ -23,15 +24,15 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const COMPLEXITY_FACTOR_INC:Float = 0.01
 	
-	Const PLAYER_MAX_VELOCITY:Float = 120
+	Const PLAYER_MAX_VELOCITY:Float = 150
 	
 	Const PLAYER_FLICKER_TIME:Float = 5
 	
 	Const PLAYER_MAX_POISONS_AMOUNT:Int = 3
 	
-	Const PROFESSORS_BASE_TIME:Float = 5
+	Const PROFESSORS_BASE_TIME:Float = 3
 	
-	Const PROFESSORS_MIN_TIME:Float = 2.5
+	Const PROFESSORS_MIN_TIME:Float = 1
 	
 	Const PROFESSORS_TIME_ZONE:Float = 2
 	
@@ -123,6 +124,10 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Field lastBonusType:Int
 	
+	Field die:Bool
+	
+	Global Score:FlxText
+	
 	Method Create:Void()
 		Add(New FlxSprite(0, 0, "bg"))
 		walls = Walls(Add(New Walls(HEIGHT)))
@@ -151,6 +156,10 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		Add(professors)
 		Add(poisons)
 		
+		Score = New FlxText(20, 5, FlxG.Width - 40, FlxG.Score)
+		Score.SetFormat("default", 36, FlxG.WHITE, FlxText.ALIGN_CENTER)
+		Add(Score)
+		
 		professorsTimer = New FlxTimer()
 		FlxTimer.Manager().Add(professorsTimer)
 		
@@ -165,11 +174,14 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		GenerateBonus()
 		
 		FlxG.PlayMusic("mad")
+		die = False
 	End Method
 	
 	Method Update:Void()
-		If ( Not player.alive) Then
-			Error "Game Over!"
+		If ( Not player.alive And Not die) Then
+			FlxG.Flash(FlxG.WHITE, 1.5, Self)
+			FlxG.Play("die", .7)
+			die = True
 		End If
 		
 		If (Shaking > 0) Then
@@ -408,6 +420,10 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 				GenerateBonus()
 		End Select
 		
+	End Method
+	
+	Method OnFlashComplete:Void()
+		FlxG.SwitchState(New GameOverState())
 	End Method
 	
 End Class
