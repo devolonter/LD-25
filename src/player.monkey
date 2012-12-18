@@ -22,7 +22,7 @@ Class Player Extends FlxSprite
 		Super.New(0, 0)
 		
 		LoadGraphic("player", True, True, 40, 80)
-		AddAnimation("run",[0, 1, 2, 3, 4, 5, 6, 7], PlayState.PLAYER_MAX_VELOCITY / 12)
+		AddAnimation("run",[0, 1, 2, 3, 4, 5, 6, 7], PlayState.PLAYER_MAX_VELOCITY / 12)		
 		
 		maxVelocity.x = PlayState.PLAYER_MAX_VELOCITY
 		drag.x = maxVelocity.x * 10

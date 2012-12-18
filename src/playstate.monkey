@@ -163,6 +163,8 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 		complexityFactor = 0
 		GenerateProfessor(True)
 		GenerateBonus()
+		
+		FlxG.PlayMusic("mad")
 	End Method
 	
 	Method Update:Void()
