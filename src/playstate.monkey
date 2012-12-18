@@ -23,7 +23,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 	
 	Const COMPLEXITY_FACTOR_INC:Float = 0.01
 	
-	Const PLAYER_MAX_VELOCITY:Float = 150
+	Const PLAYER_MAX_VELOCITY:Float = 120
 	
 	Const PLAYER_FLICKER_TIME:Float = 5
 	

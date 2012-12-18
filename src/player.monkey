@@ -21,8 +21,8 @@ Class Player Extends FlxSprite
 	Method New(lifeBar:Bar, poisonBar:Bar, poisons:FlxGroup, professors:FlxGroup)
 		Super.New(0, 0)
 		
-		LoadGraphic("player", True, True, 40, 80)
-		AddAnimation("run",[0, 1, 2, 3, 4, 5, 6, 7], PlayState.PLAYER_MAX_VELOCITY / 12)		
+		LoadGraphic("player", True, True, 35, 70)
+		AddAnimation("run",[1, 2, 3, 4, 5, 6], 12)
 		
 		maxVelocity.x = PlayState.PLAYER_MAX_VELOCITY
 		drag.x = maxVelocity.x * 10
@@ -47,7 +47,7 @@ Class Player Extends FlxSprite
 		
 		If (velocity.y = 0) Then
 			If (FlxG.Keys.JustPressed(KEY_UP))
-				velocity.y -= acceleration.y * 0.5
+				velocity.y -= acceleration.y * 0.55
 				
 			ElseIf(FlxG.Keys.JustPressed(KEY_Z) Or FlxG.Keys.JustPressed(KEY_X)) Then
 				If (poisonBar.Value > 0) Then

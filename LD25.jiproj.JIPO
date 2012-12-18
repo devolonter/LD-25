@@ -1445,7 +1445,7 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\player.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>82</X>
+        <X>43</X>
         <Y>24</Y>
       </CursorPos>
       <OutLiningSerialization>
@@ -1997,8 +1997,8 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\playstate.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>22</X>
-        <Y>258</Y>
+        <X>38</X>
+        <Y>25</Y>
       </CursorPos>
       <OutLiningSerialization>
         <Folding_Nodes_Collection>
@@ -3591,8 +3591,8 @@
     </DocUserOptions>
     <DocUserOptions Filename=".\src\professor.monkey" Open="true" SplitView="false" SplitIsVertical="false" SplitSize="155">
       <CursorPos>
-        <X>8</X>
-        <Y>77</Y>
+        <X>7</X>
+        <Y>74</Y>
       </CursorPos>
       <OutLiningSerialization>
         <Folding_Nodes_Collection>
