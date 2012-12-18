@@ -10,21 +10,49 @@ Class Professor Extends FlxSprite
 	
 	Field ladder:Int
 	
+Private
+	Field mask:FlxSprite
+	
+Public
 	Method New()
 		Super.New(0, 0)
-		LoadGraphic("professor", True, True, 40, 80)
+		LoadGraphic("professor", True, True, 30, 60)
 		ladder = 0
+		
+		mask = New FlxSprite(0, 0)
+		mask.LoadGraphic("professor_mask", True, True, 30, 60)
+		mask.visible = False
 		
 		AddAnimation("crawl",[0, 1, 2, 3], 8)
 		AddAnimation("walk",[4, 5, 6, 7, 8, 9, 10, 11], 8)
+		
+		immovable = True
 	End Method
 	
 	Method Reset:Void(x:Float, y:Float)
 		Super.Reset(x, y)
 		Play("crawl")
+		allowCollisions = ANY
+	End Method
+	
+	Method Draw:Void()
+		If ( Not mask.visible) Then
+			Super.Draw()
+		Else
+			mask.Draw()
+		End If
 	End Method
 	
 	Method Update:Void()
+		If (mask.visible) Then
+			mask.Alpha -= FlxG.Elapsed * 2
+			If (mask.Alpha <= 0) Then
+				Super.Kill()
+				mask.visible = False
+			End If
+			Return
+		End If
+	
 		If (velocity.y < 0) Then
 			If (y < PlayState.HEIGHT) Then
 				velocity.y = 0
@@ -34,6 +62,7 @@ Class Professor Extends FlxSprite
 					velocity.x = -maxVelocity.x
 					Facing = LEFT
 				Else
+					Facing = RIGHT
 					velocity.x = maxVelocity.x
 				End If
 				
@@ -49,7 +78,19 @@ Class Professor Extends FlxSprite
 		End If
 	End Method
 	
+	Method Kill:Void()
+		mask.Reset(x, y)
+		mask.Frame = Frame
+		mask.Facing = Facing
+		mask.visible = True
+		mask.Alpha = 1
+		
+		allowCollisions = NONE
+	End Method
+	
 	Method PostUpdate:Void()
+		If (mask.visible) Return
+	
 		Super.PostUpdate()
 		If (velocity.y = 0) Return
 		

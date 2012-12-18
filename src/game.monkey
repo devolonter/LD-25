@@ -32,6 +32,7 @@ Class Game Extends FlxGame
 		FlxAssetsManager.AddImage("poisonbar", "images/bar_poison.png")
 		
 		FlxAssetsManager.AddImage("professor", "images/professor.png")
+		FlxAssetsManager.AddImage("professor_mask", "images/professor_mask.png")
 		
 		FlxAssetsManager.AddMusic("mad", "music/mad." + FlxMusic.GetValidExt())
 	

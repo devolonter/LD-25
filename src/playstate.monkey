@@ -256,7 +256,7 @@ Class PlayState Extends FlxState Implements FlxTimerListener
 				End If
 				
 				professor.ladder = ladder
-				professor.Reset(77 + ladder * 143, offsetY)
+				professor.Reset(83 + ladder * 143, offsetY)
 				professor.velocity.y = - (PROFESSORS_MAX_VELOCITY_Y - PROFESSORS_BASE_VELOCITY_Y) * complexityFactor * complexityFactor - PROFESSORS_BASE_VELOCITY_Y
 				professor.maxVelocity.x = PROFESSORS_VELOCITY_X
 			End If
