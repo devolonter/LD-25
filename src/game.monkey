@@ -34,6 +34,12 @@ Class Game Extends FlxGame
 		FlxAssetsManager.AddImage("professor", "images/professor.png")
 		FlxAssetsManager.AddImage("professor_mask", "images/professor_mask.png")
 		
+		FlxAssetsManager.AddSound("jump", "sounds/jump." + FlxSound.GetValidExt())
+		FlxAssetsManager.AddSound("kill", "sounds/kill." + FlxSound.GetValidExt())
+		FlxAssetsManager.AddSound("brick", "sounds/brick." + FlxSound.GetValidExt())
+		FlxAssetsManager.AddSound("bonus", "sounds/bonus." + FlxSound.GetValidExt())
+		FlxAssetsManager.AddSound("shoot", "sounds/shoot." + FlxSound.GetValidExt())
+		
 		FlxAssetsManager.AddMusic("mad", "music/mad." + FlxMusic.GetValidExt())
 	
 		FlxTextFontMachineDriver.Init()

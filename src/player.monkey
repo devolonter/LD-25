@@ -48,6 +48,7 @@ Class Player Extends FlxSprite
 		If (velocity.y = 0) Then
 			If (FlxG.Keys.JustPressed(KEY_UP))
 				velocity.y -= acceleration.y * 0.55
+				FlxG.Play("jump")
 				
 			ElseIf(FlxG.Keys.JustPressed(KEY_Z) Or FlxG.Keys.JustPressed(KEY_X)) Then
 				If (poisonBar.Value > 0) Then
@@ -72,6 +73,8 @@ Class Player Extends FlxSprite
 							poison.velocity.x = maxVelocity.x * 2
 						End If
 					End If
+					
+					FlxG.Play("shoot")
 				End If
 			End If
 		End If
@@ -102,6 +105,7 @@ Class Player Extends FlxSprite
 			Case Bonus.BOMB
 				professors.Kill()
 				professors.Revive()
+				FlxG.Play("kill")
 			
 			Case Bonus.EARTHQUAKE				
 				PlayState.Shaking = PlayState.BONUS_EARTHQUAKE_DURATION
